@@ -1,0 +1,401 @@
+/*Fonts Imported*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Stack+Sans+Notch:wght@200..700&display=swap');
+
+/*Home Page*/
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+body {
+    min-height: 100vh;
+}
+
+/*Navigation Bar*/
+
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+}
+
+.brand {
+    font-family: "Stack Sans Notch", serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: black;
+    text-decoration: none;
+    padding: 0.5rem 0;
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+a {
+    font-family: "inter", sans-serif;
+    font-size: 100%;
+    padding: 0.75rem 1rem;
+    color: black;
+    text-decoration: none;
+}
+
+
+/*Home Page*/
+
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    width: 100%;
+    padding: 2rem clamp(1rem, 3vw, 3rem);
+    box-sizing: border-box;
+    overflow: visible;
+    flex-wrap: wrap;
+}
+
+.hero-content {
+    flex: 1 1 320px;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+h1 {
+    font-size: clamp(2rem, 5vw, 3.7rem);
+    font-family: "Stack Sans Notch", serif;
+    margin: 0;
+    line-height: 1.1;
+}
+
+p {
+    font-size: clamp(1rem, 1.7vw, 1.125rem);
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    padding-top: 2%;
+    text-wrap: wrap;
+    line-height: 1.6;
+}
+
+.hero-button {
+    margin-top: 1.5rem;
+    padding: 0.85rem 1.4rem;
+    border: none;
+    border-radius: 999px;
+    background-color: #111;
+    color: white;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+}
+
+.road-svg {
+    display: block;
+    flex: 1 1 420px;
+    width: min(100%, 1100px);
+    height: 480px;
+    min-height: 280px;
+    max-height: 480px;
+    border: 2px solid black;
+}
+
+/*Licenses Page*/
+.licenses-page {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem 1rem;
+}
+
+.auth-page {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem 3rem;
+}
+
+.auth-card {
+    width: min(100%, 980px);
+    background: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 18px;
+    padding: 2rem;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.auth-card h1 {
+    margin-bottom: 0.75rem;
+}
+
+.auth-card p {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+.auth-forms {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.auth-form {
+    background: white;
+    border: 1px solid #e2e2e2;
+    border-radius: 14px;
+    padding: 1.25rem;
+}
+
+.auth-form h2 {
+    font-family: "Stack Sans Notch", serif;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.auth-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: 0.9rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+}
+
+.auth-form input {
+    padding: 0.7rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font: inherit;
+}
+
+.auth-form button {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 999px;
+    background: #111;
+    color: white;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+}
+
+.auth-message {
+    margin-bottom: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    background: #e8f5e9;
+    color: #1b5e20;
+}
+
+.auth-message.error {
+    background: #fdecea;
+    color: #b71c1c;
+}
+
+.driving-page {
+    padding: 2rem 1rem 3rem;
+}
+
+.driving-page-content {
+    width: min(100%, 1100px);
+}
+
+.driving-page-content h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.driving-tips {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.driving-tip {
+    max-width: min(92%, 720px);
+    padding: 1.5rem 1.75rem;
+    background: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 18px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+    transform: translateX(-28px);
+}
+
+.driving-tip--right {
+    margin-left: auto;
+    transform: translateX(28px);
+}
+
+.driving-tip h2 {
+    font-family: "Stack Sans Notch", serif;
+    margin: 0 0 0.7rem;
+    font-size: 1.35rem;
+}
+
+.driving-tip p {
+    padding-top: 0;
+    line-height: 1.7;
+    font-size: 1.02rem;
+}
+
+#Licenses {
+    font-size: clamp(2rem, 5vw, 3.7rem);
+    font-family: "Stack Sans Notch", serif;
+    margin: 0 0 1.5rem;
+    line-height: 1.1;
+    text-align: center;
+}
+
+.resources-page {
+    padding: 2rem 1rem 3rem;
+}
+
+.resources-page-content {
+    width: min(100%, 1100px);
+}
+
+.resources-page-content h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.resource-card {
+    background: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 18px;
+    padding: 1.25rem 1.4rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.resource-card h2 {
+    font-family: "Stack Sans Notch", serif;
+    margin: 0 0 0.6rem;
+    font-size: 1.2rem;
+}
+
+.resource-card p {
+    padding-top: 0;
+    line-height: 1.6;
+}
+
+.resource-details {
+    margin-top: 0.9rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #e2e2e2;
+}
+
+.resource-details p {
+    margin: 0.25rem 0;
+}
+
+.resource-details a {
+    padding: 0;
+    color: #1a4fb8;
+    text-decoration: underline;
+}
+.licenses-content {
+    width: min(100%, 1000px);
+}
+
+.license-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.license-card {
+    background: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    padding: 1.25rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.license-card h2 {
+    font-family: "Stack Sans Notch", serif;
+    margin: 0 0 0.6rem;
+    font-size: 1.3rem;
+}
+
+.license-card p {
+    padding-top: 0;
+    font-size: 0.98rem;
+    line-height: 1.5;
+}
+
+.license-card-image {
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 0.8rem;
+    display: block;
+    border-radius: 10px;
+}
+
+.license-card-image--full {
+    max-width: 220px;
+}
+
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .road-svg {
+        width: 100%;
+        height: 360px;
+        max-height: 360px;
+    }
+}
+
+@media (max-width: 600px) {
+    .topnav {
+        justify-content: center;
+    }
+
+    .hero {
+        padding: 1.25rem 1rem;
+    }
+
+    .hero-button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .driving-tip {
+        max-width: 100%;
+        margin-left: 0;
+        transform: none;
+    }
+
+    .auth-forms {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-card {
+        padding: 1.25rem;
+    }
+}

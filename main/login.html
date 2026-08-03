@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drive Hub | Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="topnav">
+    <a href="home.html" class="brand">DriveHub</a>
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="license.html">Licenses</a>
+      <a href="driving.html">Driving</a>
+      <a href="resources.html">Resources</a>
+      <a href="login.html">Login</a>
+    </div>
+  </div>
+
+  <div class="auth-page">
+    <div class="auth-card">
+      <h1>Access Theory Test Resources</h1>
+      <p>Create an account or log in to unlock resources to help you prepare for your theory test.</p>
+      <div id="authMessage" class="auth-message" role="status"></div>
+
+      <div class="auth-forms">
+        <form id="signupForm" class="auth-form">
+          <h2>Sign Up</h2>
+          <label>
+            Full name
+            <input type="text" id="signupName" name="signupName" required>
+          </label>
+          <label>
+            Email
+            <input type="email" id="signupEmail" name="signupEmail" required>
+          </label>
+          <label>
+            Password
+            <input type="password" id="signupPassword" name="signupPassword" required>
+          </label>
+          <button type="submit">Create Account</button>
+        </form>
+
+        <form id="loginForm" class="auth-form">
+          <h2>Login</h2>
+          <label>
+            Email
+            <input type="email" id="loginEmail" name="loginEmail" required>
+          </label>
+          <label>
+            Password
+            <input type="password" id="loginPassword" name="loginPassword" required>
+          </label>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

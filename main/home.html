@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drive Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="topnav">
+    <a href="home.html" class="brand">DriveHub</a>
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="license.html">Licenses</a>
+      <a href="driving.html">Driving</a>
+      <a href="resources.html">Resources</a>
+      <a href="login.html">Login</a>
+    </div>
+  </div>
+  <br>
+<!-- Hero Section -->
+ <div class="hero">
+  <!-- Hero Page Road Animation -->
+  <svg class="road-svg" viewBox="0 0 1700 520" width="100%" height="480" preserveAspectRatio="xMidYMid slice">
+    <!-- Road Path SVG -->
+    <path 
+      d="M-500 270 L2200 440"
+      stroke="#555"
+      stroke-width="26"
+      stroke-linecap="round"
+      fill="none"/>
+
+    <path
+      d="M-500 20 L2200 160"
+      stroke="#555"
+      stroke-width="26"
+      stroke-linecap="round"
+      fill="none"/>
+
+    <path
+      d="M-500 130 L2200 290"
+      stroke="black"
+      stroke-width="4"
+      stroke-dasharray="20 16"
+      stroke-linecap="round"
+      fill="none"/>
+
+    <path
+      d="M590 326 L565 520"
+      stroke="#555"
+      stroke-width="26"
+      fill="none"/>
+
+    <path
+      d="M870 344 L845 520"
+      stroke="#555"
+      stroke-width="26"
+      fill="none"/>
+    
+    <path
+      d="M730 360 L705 545"
+      stroke="black"
+      stroke-width="4"
+      stroke-dasharray="20 16"
+      stroke-linecap="round"
+      fill="none"/>
+
+  </svg>
+  <div class="hero-content">
+    <h1 id="homeheading"></h1>
+    <p id="home_description"></p>
+    <button class="hero-button" onclick="window.location.href='driving.html'">Start Driving</button>
+  </div>
+ </div>
+  <script src="script.js"></script>     
+</body>
+</html>
