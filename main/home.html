@@ -14,7 +14,12 @@
       <a href="license.html">Licenses</a>
       <a href="driving.html">Driving</a>
       <a href="resources.html">Resources</a>
-      <a href="login.html">Login</a>
+      <a href="login.html" aria-label="Login" class="nav-login-icon-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 21v-1a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v1"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
     </div>
   </div>
   <br>
@@ -69,7 +74,10 @@
   <div class="hero-content">
     <h1 id="homeheading"></h1>
     <p id="home_description"></p>
-    <button class="hero-button" onclick="window.location.href='driving.html'">Start Driving</button>
+    <button class="hero-button" onclick="window.location.href='driving.html'">
+      <span>Start Driving</span>
+      <span class="hero-button-arrow" aria-hidden="true">→</span>
+    </button>
   </div>
  </div>
   <script src="script.js"></script>     

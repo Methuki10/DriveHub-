@@ -1,5 +1,15 @@
 //DriveHub
 
+const currentPage = window.location.pathname.split('/').pop() || "home.html";
+const navLinks = document.querySelectorAll('.nav-links a');
+
+navLinks.forEach((link) => {
+  const linkPage = link.getAttribute('href');
+  if (linkPage === currentPage) {
+    link.classList.add('active');
+  }
+});
+
 // =====================
 // Home Page
 // =====================
@@ -46,6 +56,7 @@ if (licenseCardsContainer) {
       <img src="${card.image}" alt="${card.title}" class="license-card-image${isFullLicense ? " license-card-image--full" : ""}">
       <h2>${card.title}</h2>
       <p>${card.text}</p>
+      <button class="license-card-button" type="button">Learn more <span aria-hidden="true">→</span></button>
     `;
 
     licenseCardsContainer.appendChild(cardElement);
