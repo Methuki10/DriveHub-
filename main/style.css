@@ -189,7 +189,7 @@ p {
 
 .hero-button:hover {
     transform: translateY(-2px) scale(1.02);
-    background-color: #222;
+    background-color: #3a6696;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
 }
 
@@ -327,11 +327,21 @@ p {
 .action-box--left {
     justify-self: start;
     transform: translateX(-140px);
+    border: 2px solid #A878C2;
 }
 
 .action-box--right {
     justify-self: end;
     transform: translateX(140px);
+    border: 2px solid #32D6A4;
+}
+
+.action-box--left:hover {
+    border-color: #A878C2;
+}
+
+.action-box--right:hover {
+    border-color: #32D6A4;
 }
 
 .action-box.visible {
@@ -383,6 +393,18 @@ p {
 .action-box-link:hover {
     transform: translateY(-1px);
     background-color: #222;
+}
+
+.action-box--left:hover .action-box-link,
+.action-box--left .action-box-link:hover {
+    background-color: #A878C2 !important;
+    color: #fff !important;
+}
+
+.action-box--right:hover .action-box-link,
+.action-box--right .action-box-link:hover {
+    background-color: #32D6A4 !important;
+    color: #fff !important;
 }
 
 @media (max-width: 820px) {
@@ -672,7 +694,7 @@ p {
 
 .license-card-button:hover {
     transform: translateY(-2px) scale(1.02);
-    background: #222;
+    background: #111;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
 }
 
