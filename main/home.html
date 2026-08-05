@@ -25,61 +25,19 @@
   <br>
 <!-- Hero Section -->
  <div class="hero">
-  <!-- Hero Page Road Animation -->
-  <svg class="road-svg" viewBox="0 0 1700 520" width="100%" height="480" preserveAspectRatio="xMidYMid slice">
-    <!-- Road Path SVG -->
-    <path 
-      d="M-500 270 L2200 440"
-      stroke="#555"
-      stroke-width="26"
-      stroke-linecap="round"
-      fill="none"/>
-
-    <path
-      d="M-500 20 L2200 160"
-      stroke="#555"
-      stroke-width="26"
-      stroke-linecap="round"
-      fill="none"/>
-
-    <path
-      d="M-500 130 L2200 290"
-      stroke="black"
-      stroke-width="4"
-      stroke-dasharray="20 16"
-      stroke-linecap="round"
-      fill="none"/>
-
-    <path
-      d="M590 326 L565 520"
-      stroke="#555"
-      stroke-width="26"
-      fill="none"/>
-
-    <path
-      d="M870 344 L845 520"
-      stroke="#555"
-      stroke-width="26"
-      fill="none"/>
-    
-    <path
-      d="M730 360 L705 545"
-      stroke="black"
-      stroke-width="4"
-      stroke-dasharray="20 16"
-      stroke-linecap="round"
-      fill="none"/>
-
-  </svg>
+  <!-- Hero background image applied via CSS -->
   <div class="hero-content">
     <h1 id="homeheading"></h1>
     <p id="home_description"></p>
-    <button class="hero-button" onclick="window.location.href='driving.html'">
+    <button id="startDrivingButton" class="hero-button" type="button">
       <span>Start Driving</span>
       <span class="hero-button-arrow" aria-hidden="true">→</span>
     </button>
   </div>
  </div>
+ <section id="learn-more" class="home-details">
+   <div id="homeSectionContent"></div>
+ </section>
   <script src="script.js"></script>     
 </body>
 </html>
