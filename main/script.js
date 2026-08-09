@@ -1,5 +1,18 @@
 //DriveHub
 
+// Capture any initial hash and clear it immediately so the browser doesn't auto-jump.
+// We'll smooth-scroll to the saved id after DOM is ready.
+let _initialHashId = '';
+if (location.hash) {
+  _initialHashId = location.hash.replace('#', '');
+  try {
+    history.replaceState(null, '', location.pathname + location.search);
+  } catch (err) {
+    // ignore
+  }
+  try { window.scrollTo(0, 0); } catch (e) {}
+}
+
 const currentPage = window.location.pathname.split('/').pop() || "home.html";
 const navLinks = document.querySelectorAll('.nav-links a');
 
@@ -173,7 +186,7 @@ const licenseCards = [
   },
   {
     title: 'Full',
-    text: "Full Licence &mdash; Granted when you have met testing and experience requirements. A full licence removes the earlier learner/restricted limits and gives you full driving privileges on New Zealand roads.",
+    text: "Full Licence &mdash; When you have met testing and experience requirements. A full licence removes restricted limits and gives you full driving privileges on New Zealand roads.",
     image: 'Images/fullCar.png'
   }
 ];
@@ -397,12 +410,22 @@ function smoothScrollToId(id) {
   window.scrollTo({ top, behavior: 'smooth' });
 }
 
-// If page loaded with a hash, override default jump and apply our offset scroll
-if (location.hash) {
-  const id = location.hash.replace('#', '');
-  // allow browser to render then scroll
-  setTimeout(() => smoothScrollToId(id), 60);
-}
+// Licnse note
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    const note = document.querySelector('.license-note');
+    if (!note) return;
+    const nztaLink = '<a href="https://www.nzta.govt.nz/driver-licences" target="_blank" rel="noopener noreferrer">Driver Licences</a>';
+    note.innerHTML = `Note: Licensing requirements may change. Check NZTA &mdash;${nztaLink}for the latest details.`;
+    // Add the purple, compact and full-bleed styles
+    note.classList.add('license-note--purple', 'license-note--full');
+    if (_initialHashId) {
+      setTimeout(() => smoothScrollToId(_initialHashId), 80);
+    }
+  } catch (err) {
+    // fail silently
+  }
+});
 
 // Intercept clicks on anchors that target the same page (including full path links)
 document.addEventListener('click', (e) => {
@@ -413,7 +436,7 @@ document.addEventListener('click', (e) => {
     if (url.hash && url.pathname === location.pathname) {
       e.preventDefault();
       const id = url.hash.replace('#', '');
-      history.pushState(null, '', url.hash);
+      // Do not write the hash into history; just smooth-scroll
       smoothScrollToId(id);
     }
   } catch (err) {
