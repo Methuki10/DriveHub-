@@ -146,6 +146,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Insert a small description under the Driving page heading when present
+  try {
+    const drivingContent = document.querySelector('.driving-page-content');
+    if (drivingContent) {
+      const existingDesc = drivingContent.querySelector('.driving-description');
+      if (!existingDesc) {
+        const desc = document.createElement('p');
+        desc.className = 'driving-description';
+        desc.innerHTML = '<span class="driving-lead">Learn to Drive Safely</span> Driving is a responsibility. Every time you get behind the wheel, you are responsible for your own safety and the safety of everyone around you. DriveHub provides simple information to help new drivers understand safe driving habits, New Zealand roads and what to expect when driving in Aotearoa.';
+        const heading = drivingContent.querySelector('h1');
+        if (heading && heading.parentNode) {
+          heading.parentNode.insertBefore(desc, heading.nextSibling);
+        } else {
+          drivingContent.insertBefore(desc, drivingContent.firstChild);
+        }
+      }
+    }
+  } catch (err) {
+    // ignore
+  }
+
   // =====================
   // Scroll-triggered Reveal
   // =====================
@@ -450,12 +471,212 @@ document.addEventListener('click', (e) => {
 const drivingTips = [
   {
     title: 'Staying Safe on the Road',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+    text: `
+      <h3>Stay Focused</h3>
+      <p>Driving requires your full attention. Keep your eyes on the road, check your mirrors regularly and stay aware of what is happening around you.</p>
+      <p>Avoid distractions such as using your phone, changing music, eating or having complicated conversations while driving. If you need to use your phone or deal with something that takes your attention away from driving, pull over and park somewhere safe first.</p>
+      <p><strong>Remember:</strong> Even looking away from the road for a few seconds can mean travelling a significant distance without seeing what is ahead.</p>
+
+      <h3>Keep a Safe Following Distance</h3>
+      <p>Leave enough space between your vehicle and the vehicle in front of you. This gives you more time to react if the vehicle ahead suddenly slows or stops.</p>
+      <p>Use the <strong>2-second rule</strong> in good conditions. Increase this to <strong>4 seconds</strong> when conditions are wet, slippery, dark or otherwise difficult.</p>
+      <p>A safe gap is especially important at higher speeds because you need more time and distance to stop.</p>
+
+      <h3>Drive at a Safe Speed</h3>
+      <p>Speed limits show the maximum legal speed for a road, but they do not mean you should always drive at that speed.</p>
+      <p>You may need to drive slower when:</p>
+      <ul>
+        <li>The road is wet or slippery</li>
+        <li>Visibility is poor</li>
+        <li>There is heavy traffic</li>
+        <li>The road is narrow or winding</li>
+        <li>There are pedestrians or cyclists nearby</li>
+        <li>You are approaching a hazard</li>
+        <li>Roadworks are taking place</li>
+      </ul>
+      <p>Choose a speed that allows you to stay in control and safely respond to hazards.</p>
+
+      <h3>Wear Your Seatbelt</h3>
+      <p>Everyone travelling in a vehicle must wear a seatbelt or use an appropriate child restraint.</p>
+      <p>Always check that your seatbelt is correctly fastened before starting the vehicle. Seatbelts help protect drivers and passengers if a crash occurs.</p>
+
+      <h3>Avoid Driving When Tired</h3>
+      <p>Fatigue can make it harder to concentrate, react quickly and make good decisions.</p>
+      <p>Signs that you may be becoming tired include:</p>
+      <ul>
+        <li>Frequent yawning</li>
+        <li>Difficulty keeping your eyes open</li>
+        <li>Trouble concentrating</li>
+        <li>Missing signs or exits</li>
+        <li>Drifting within your lane</li>
+        <li>Feeling restless or irritable</li>
+      </ul>
+      <p>If you become tired while driving, do not try to push through it. Stop somewhere safe and take a break. On longer journeys, plan regular rest stops.</p>
+
+      <h3>Keep Your Vehicle Safe</h3>
+      <p>Before driving, make sure your vehicle is safe to use. Check:</p>
+      <ul>
+        <li>Tyres</li>
+        <li>Lights</li>
+        <li>Mirrors</li>
+        <li>Windscreen</li>
+        <li>Wipers</li>
+        <li>Seatbelts</li>
+        <li>Fuel or battery level</li>
+        <li>Warrant of Fitness (WoF) and registration</li>
+      </ul>
+      <p>Make sure anything you are carrying is secured so it cannot move around inside the vehicle or become a hazard..</p>
+    `,
     side: 'left'
   },
   {
     title: 'Driving in Aotearoa',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+    text: `
+      <h3>Driving on the Left</h3>
+      <p>New Zealand drives on the <strong>left-hand side of the road</strong>.</p>
+      <p>When turning or changing lanes, always check your mirrors and blind spots and make sure it is safe before moving.</p>
+      <p>If you are new to driving in New Zealand, take extra care at intersections, roundabouts and multi-lane roads.</p>
+
+      <h3>New Zealand Speed Limits</h3>
+      <p>Speed limits vary depending on the road and location.</p>
+      <p>In many urban areas, the default speed limit is <strong>50 km/h</strong>, while many rural roads and motorways have higher limits unless signs show otherwise.</p>
+      <p>Always look for speed signs and remember that the appropriate speed can be lower than the posted limit when road or weather conditions are difficult.</p>
+
+      <h3>Intersections</h3>
+      <p>Intersections are areas where different road users meet, so it is important to approach them carefully.</p>
+      <p>Before entering an intersection:</p>
+      <ol>
+        <li>Check the road ahead.</li>
+        <li>Check your mirrors.</li>
+        <li>Look for pedestrians, cyclists and other vehicles.</li>
+        <li>Follow traffic lights, signs and road markings.</li>
+        <li>Give way when required.</li>
+        <li>Only proceed when it is safe.</li>
+      </ol>
+      <p>Understanding <strong>give-way rules</strong> is an important part of becoming a safe New Zealand driver.</p>
+
+      <h3>Roundabouts</h3>
+      <p>At a roundabout, slow down and be prepared to stop.</p>
+      <p>Look for other vehicles, cyclists and pedestrians and follow the correct lane markings and indicators.</p>
+      <p>Before entering a roundabout, make sure you understand which direction other vehicles are travelling and who has priority.</p>
+
+      <h3>Rural Roads</h3>
+      <p>Driving in rural areas can be very different from driving in a city.</p>
+      <p>You may encounter:</p>
+      <ul>
+        <li>Narrow roads</li>
+        <li>Sharp bends</li>
+        <li>Limited visibility</li>
+        <li>Gravel or loose surfaces</li>
+        <li>Farm vehicles</li>
+        <li>Stock</li>
+        <li>Cyclists</li>
+        <li>Motorcyclists</li>
+        <li>One-lane bridges</li>
+      </ul>
+      <p>Do not assume that a rural road is safe to travel at the maximum speed simply because the speed limit allows it. Slow down when the road or conditions require it.</p>
+
+      <h3>Sharing the Road</h3>
+      <p>New Zealand roads are shared by many different road users.</p>
+      <p>Be aware of:</p>
+      <ul>
+        <li>Pedestrians</li>
+        <li>Cyclists</li>
+        <li>Motorcyclists</li>
+        <li>Buses</li>
+        <li>Trucks</li>
+        <li>Emergency vehicles</li>
+        <li>Horse riders</li>
+        <li>Farm vehicles</li>
+      </ul>
+      <p>Give other road users enough space and be patient. Large vehicles may need extra room to turn, stop or change lanes.</p>
+
+      <h3>One-Lane Bridges</h3>
+      <p>New Zealand has many one-lane bridges, particularly in rural areas.</p>
+      <p>Always look for signs showing which direction has priority. Slow down before reaching the bridge and be prepared to stop if another vehicle has priority.</p>
+      <p>Never assume you can cross first.</p>
+    `,
+    side: 'right'
+  }
+  ,
+  {
+    title: 'Driving to the Conditions',
+    text: `
+      <h3>Rain</h3>
+      <p>Rain can reduce visibility and make the road slippery.</p>
+      <p>When driving in wet conditions:</p>
+      <ul>
+        <li>Reduce your speed when necessary.</li>
+        <li>Increase your following distance.</li>
+        <li>Turn on your headlights when visibility is reduced.</li>
+        <li>Avoid sudden braking or steering.</li>
+        <li>Watch for water on the road.</li>
+      </ul>
+
+      <h3>Fog</h3>
+      <p>Fog can make it difficult to see other vehicles, road markings and hazards.</p>
+      <p>Slow down and increase your following distance. Use your vehicle's lights appropriately and avoid driving faster than you can safely see ahead.</p>
+
+      <h3>Sun Glare</h3>
+      <p>Low sunlight can make it difficult to see.</p>
+      <p>Keep your windscreen clean, use your sun visor and slow down if glare affects your visibility.</p>
+
+      <h3>Snow and Ice</h3>
+      <p>Some parts of New Zealand experience snow and icy roads during winter.</p>
+      <p>Roads can become slippery and stopping distances can increase. Drive carefully, reduce your speed and be especially cautious around shaded areas, bridges and exposed roads.</p>
+    `,
+    side: 'left'
+  },
+  {
+    title: 'Before You Drive',
+    text: `
+      <p>Before starting your journey:</p>
+      <ol>
+        <li><strong>Adjust your seat</strong><br>Make sure you can comfortably reach the pedals and controls.</li>
+        <li><strong>Adjust your mirrors</strong><br>Make sure you have a clear view around the vehicle.</li>
+        <li><strong>Fasten your seatbelt</strong><br>Check that everyone in the vehicle is properly restrained.</li>
+        <li><strong>Remove distractions</strong><br>Put your phone away and set up music or navigation before moving.</li>
+        <li><strong>Check your surroundings</strong><br>Look around the vehicle before leaving.</li>
+        <li><strong>Plan your journey</strong><br>Know where you are going and allow enough time so you don't feel pressured to drive too quickly.</li>
+      </ol>
+    `,
+    side: 'right'
+  },
+  {
+    title: 'What to Do in an Emergency',
+    text: `
+      <p>If something goes wrong while driving, stay calm and focus on getting yourself and others to a safe place.</p>
+      <p>If your vehicle develops a problem:</p>
+      <ul>
+        <li>Slow down safely.</li>
+        <li>Move to a safe location if possible.</li>
+        <li>Turn on your hazard lights when appropriate.</li>
+        <li>Stay aware of other traffic.</li>
+        <li>Get help if necessary.</li>
+      </ul>
+      <p>If you are involved in a crash, check whether anyone is injured and make sure the scene is as safe as possible. Follow the appropriate emergency and reporting procedures.</p>
+      <p>If there is an immediate danger or someone needs urgent medical assistance, call <strong>111</strong>.</p>
+    `,
+    side: 'left'
+  },
+  {
+    title: 'Be a Responsible Driver',
+    text: `
+      <p>Being a good driver is more than simply passing a test.</p>
+      <p>A responsible driver:</p>
+      <ul>
+        <li>Follows the road rules</li>
+        <li>Stays focused</li>
+        <li>Drives to the conditions</li>
+        <li>Controls their speed</li>
+        <li>Gives other road users space</li>
+        <li>Plans ahead</li>
+        <li>Keeps their vehicle safe</li>
+        <li>Recognises their own limits</li>
+        <li>Makes safety the priority</li>
+      </ul>
+      <p>The goal isn't just to get your licence — it's to become a driver who helps keep New Zealand's roads safe.</p>
+    `,
     side: 'right'
   }
 ];
@@ -469,7 +690,7 @@ if (drivingTipsContainer) {
 
     tipElement.innerHTML = `
       <h2>${tip.title}</h2>
-      <p>${tip.text}</p>
+      <div class="driving-tip-body">${tip.text}</div>
     `;
 
     drivingTipsContainer.appendChild(tipElement);

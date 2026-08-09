@@ -543,30 +543,42 @@ p {
 }
 
 .driving-tip {
-    max-width: min(92%, 720px);
-    padding: 1.5rem 1.75rem;
-    background: #f7f7f7;
-    border: 1px solid #ddd;
-    border-radius: 18px;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
-    transform: translateX(-28px);
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem 2.25rem;
+    background: var(--card);
+    border: 1px solid rgba(16,24,40,0.06);
+    border-radius: 14px;
+    box-shadow: 0 12px 36px rgba(16,24,40,0.06);
+    transform: none;
 }
 
 .driving-tip--right {
     margin-left: auto;
-    transform: translateX(28px);
+    transform: none;
 }
 
 .driving-tip h2 {
     font-family: "Stack Sans Notch", serif;
-    margin: 0 0 0.7rem;
-    font-size: 1.35rem;
+    margin: 0 0 0.8rem;
+    font-size: 1.45rem;
 }
 
 .driving-tip p {
     padding-top: 0;
-    line-height: 1.7;
-    font-size: 1.02rem;
+    line-height: 1.75;
+    font-size: 1.05rem;
+}
+
+@media (max-width: 900px) {
+    .driving-tip {
+        padding: 1.25rem 1.25rem;
+        border-radius: 12px;
+    }
+    .driving-page-content {
+        padding: 0 1rem;
+    }
 }
 
 #Licenses {
@@ -770,6 +782,46 @@ p {
     padding: 0.5rem 0;
     border-radius: 0;
     text-align: center;
+}
+
+/* Driving page description styling */
+.driving-description {
+    color: var(--muted);
+    text-align: center;
+    max-width: 900px;
+    margin: 0.75rem auto 1.5rem;
+    font-size: 1.03rem;
+    line-height: 1.6;
+}
+
+.driving-description .driving-lead {
+    display: block;
+    font-weight: 700;
+    color: #0f1720;
+    font-size: 1.12rem;
+    margin-bottom: 0.35rem;
+}
+
+/* Driving tip body styling for consistency */
+.driving-tip-body {
+    color: var(--muted);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.driving-tip-body h3 {
+    color: #0f1720;
+    margin-top: 0.8rem;
+    margin-bottom: 0.35rem;
+    font-size: 1.03rem;
+}
+
+.driving-tip-body p {
+    margin: 0 0 0.6rem 0;
+}
+
+.driving-tip-body ul {
+    margin: 0.25rem 0 0.9rem 1.25rem;
 }
 
 /* Theme polish and consistent button accent */
