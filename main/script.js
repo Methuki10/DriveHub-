@@ -675,7 +675,7 @@ const drivingTips = [
         <li>Recognises their own limits</li>
         <li>Makes safety the priority</li>
       </ul>
-      <p>The goal isn't just to get your licence — it's to become a driver who helps keep New Zealand's roads safe.</p>
+      <p>The goal isn't just to get your licence, it's to become a driver who helps keep New Zealand's roads safe.</p>
     `,
     side: 'right'
   }
@@ -745,6 +745,50 @@ if (resourcesGrid) {
 
     resourcesGrid.appendChild(resourceCard);
   });
+}
+
+// Build a table-of-contents for driving tips so users can jump quickly
+const drivingPageContent = document.querySelector('.driving-page-content');
+if (drivingTipsContainer && drivingPageContent) {
+  // When creating tips earlier we didn't set IDs; ensure each rendered tip has an id
+  const tipNodes = Array.from(drivingTipsContainer.querySelectorAll('.driving-tip'));
+  if (tipNodes.length === drivingTips.length) {
+    tipNodes.forEach((node, idx) => {
+      const title = drivingTips[idx].title || node.querySelector('h2')?.textContent || `section-${idx+1}`;
+      const slug = title.toLowerCase().replace(/[\s\/]+/g, '-').replace(/[^a-z0-9\-]/g, '');
+      node.id = slug;
+    });
+
+    // Create TOC nav
+    const existingToc = drivingPageContent.querySelector('.driving-toc');
+    if (!existingToc) {
+      const toc = document.createElement('nav');
+      toc.className = 'driving-toc';
+      const ul = document.createElement('ul');
+      drivingTips.forEach((tip) => {
+        const title = tip.title;
+        const slug = title.toLowerCase().replace(/[\s\/]+/g, '-').replace(/[^a-z0-9\-]/g, '');
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `#${slug}`;
+        a.textContent = title;
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+      toc.appendChild(ul);
+
+      // Insert TOC after the H1 and before the driving description if present
+      const heading = drivingPageContent.querySelector('h1');
+      const desc = drivingPageContent.querySelector('.driving-description');
+      if (heading && desc) {
+        heading.parentNode.insertBefore(toc, desc);
+      } else if (heading) {
+        heading.parentNode.insertBefore(toc, heading.nextSibling);
+      } else {
+        drivingPageContent.insertBefore(toc, drivingPageContent.firstChild);
+      }
+    }
+  }
 }
 
 // =====================

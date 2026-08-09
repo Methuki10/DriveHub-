@@ -824,6 +824,35 @@ p {
     margin: 0.25rem 0 0.9rem 1.25rem;
 }
 
+/* Table of contents for driving page */
+.driving-toc {
+    max-width: 1100px;
+    margin: 0.5rem auto 1rem;
+    padding: 0 1rem;
+}
+.driving-toc ul {
+    list-style: none;
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+.driving-toc a {
+    display: inline-block;
+    padding: 0.45rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(241,137,136,0.08);
+    color: #0b1220;
+    text-decoration: none;
+    font-weight: 600;
+}
+.driving-toc a:hover {
+    background: #f18988;
+    color: #fff;
+}
+
 /* Theme polish and consistent button accent */
 :root {
     --accent: #32D6A4;
