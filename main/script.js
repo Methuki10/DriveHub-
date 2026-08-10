@@ -1,7 +1,6 @@
 //DriveHub
 
-// Capture any initial hash and clear it immediately so the browser doesn't auto-jump.
-// We'll smooth-scroll to the saved id after DOM is ready.
+// Smooth Scroolling 
 let _initialHashId = '';
 if (location.hash) {
   _initialHashId = location.hash.replace('#', '');
@@ -23,6 +22,31 @@ navLinks.forEach((link) => {
     link.classList.add('active');
   }
 });
+
+
+// Adds the reveal animation after the dynamically generated boxes exist.
+const revealHomeBoxes = () => {
+  const featureBoxes = document.querySelectorAll('.feature-box, .action-box');
+
+  if ('IntersectionObserver' in window && featureBoxes.length) {
+    const observer = new IntersectionObserver(
+      (entries, observerInstance) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observerInstance.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.35 }
+    );
+
+    featureBoxes.forEach((box) => observer.observe(box));
+  } else {
+    featureBoxes.forEach((box) => box.classList.add('visible'));
+  }
+};
+
 
 // =====================
 // Home Page
@@ -83,7 +107,7 @@ const homeSectionData = {
 
 document.addEventListener('DOMContentLoaded', () => {
   // =====================
-  // Home Section Rendering
+  // Home Section Feauture Boxes
   // =====================
   const homeSectionContent = document.getElementById('homeSectionContent');
 
@@ -121,6 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
           .join('')}
       </div>
     `;
+
+    revealHomeBoxes();
   }
 
   // =====================
@@ -145,51 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-
-  // Insert a small description under the Driving page heading when present
-  try {
-    const drivingContent = document.querySelector('.driving-page-content');
-    if (drivingContent) {
-      const existingDesc = drivingContent.querySelector('.driving-description');
-      if (!existingDesc) {
-        const desc = document.createElement('p');
-        desc.className = 'driving-description';
-        desc.innerHTML = '<span class="driving-lead">Learn to Drive Safely</span> Driving is a responsibility. Every time you get behind the wheel, you are responsible for your own safety and the safety of everyone around you. DriveHub provides simple information to help new drivers understand safe driving habits, New Zealand roads and what to expect when driving in Aotearoa.';
-        const heading = drivingContent.querySelector('h1');
-        if (heading && heading.parentNode) {
-          heading.parentNode.insertBefore(desc, heading.nextSibling);
-        } else {
-          drivingContent.insertBefore(desc, drivingContent.firstChild);
-        }
-      }
-    }
-  } catch (err) {
-    // ignore
-  }
-
-  // =====================
-  // Scroll-triggered Reveal
-  // =====================
-  const featureBoxes = document.querySelectorAll('.feature-box, .action-box');
-
-  if ('IntersectionObserver' in window && featureBoxes.length) {
-    const observer = new IntersectionObserver(
-      (entries, observerInstance) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observerInstance.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.35 }
-    );
-
-    featureBoxes.forEach((box) => observer.observe(box));
-  } else {
-    featureBoxes.forEach((box) => box.classList.add('visible'));
-  }
 });
+
 
 // =====================
 // License Page
@@ -468,6 +451,28 @@ document.addEventListener('click', (e) => {
 // =====================
 // Driving Page
 // =====================
+
+  // Description under the Driving page heading when present
+  try {
+    const drivingContent = document.querySelector('.driving-page-content');
+    if (drivingContent) {
+      const existingDesc = drivingContent.querySelector('.driving-description');
+      if (!existingDesc) {
+        const desc = document.createElement('p');
+        desc.className = 'driving-description';
+        desc.innerHTML = '<span class="driving-lead">Learn to Drive Safely</span> Driving is a responsibility. Every time you get behind the wheel, you are responsible for your own safety and the safety of everyone around you. DriveHub provides simple information to help new drivers understand safe driving habits, New Zealand roads and what to expect when driving in Aotearoa.';
+        const heading = drivingContent.querySelector('h1');
+        if (heading && heading.parentNode) {
+          heading.parentNode.insertBefore(desc, heading.nextSibling);
+        } else {
+          drivingContent.insertBefore(desc, drivingContent.firstChild);
+        }
+      }
+    }
+  } catch (err) {
+    // ignore
+  }
+  
 const drivingTips = [
   {
     title: 'Staying Safe on the Road',
@@ -697,6 +702,51 @@ if (drivingTipsContainer) {
   });
 }
 
+// Table of contents for driving tips so users can jump quickly
+const drivingPageContent = document.querySelector('.driving-page-content');
+if (drivingTipsContainer && drivingPageContent) {
+  // When creating tips earlier we didn't set IDs; ensure each rendered tip has an id
+  const tipNodes = Array.from(drivingTipsContainer.querySelectorAll('.driving-tip'));
+  if (tipNodes.length === drivingTips.length) {
+    tipNodes.forEach((node, idx) => {
+      const title = drivingTips[idx].title || node.querySelector('h2')?.textContent || `section-${idx+1}`;
+      const slug = title.toLowerCase().replace(/[\s\/]+/g, '-').replace(/[^a-z0-9\-]/g, '');
+      node.id = slug;
+    });
+
+    // Create TOC nav
+    const existingToc = drivingPageContent.querySelector('.driving-toc');
+    if (!existingToc) {
+      const toc = document.createElement('nav');
+      toc.className = 'driving-toc';
+      const ul = document.createElement('ul');
+      drivingTips.forEach((tip) => {
+        const title = tip.title;
+        const slug = title.toLowerCase().replace(/[\s\/]+/g, '-').replace(/[^a-z0-9\-]/g, '');
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `#${slug}`;
+        a.textContent = title;
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+      toc.appendChild(ul);
+
+      // Insert TOC after the H1 and before the driving description if present
+      const heading = drivingPageContent.querySelector('h1');
+      const desc = drivingPageContent.querySelector('.driving-description');
+      if (heading && desc) {
+        heading.parentNode.insertBefore(toc, desc);
+      } else if (heading) {
+        heading.parentNode.insertBefore(toc, heading.nextSibling);
+      } else {
+        drivingPageContent.insertBefore(toc, drivingPageContent.firstChild);
+      }
+    }
+  }
+}
+
+
 // =====================
 // Resources Page
 // =====================
@@ -921,7 +971,7 @@ if (resourcesGrid) {
     resourcesGrid.appendChild(resourceCard);
   });
 
-  // Build a table of contents for resources sections.
+  // Table of contents for resources sections.
   const resourcesContent = document.querySelector('.resources-page-content');
   if (resourcesContent) {
     const existingToc = resourcesContent.querySelector('.driving-toc');
@@ -963,7 +1013,7 @@ if (resourcesGrid) {
         </article>
         <article class="emergency-contact-item">
           <h3>105 — Police Non-Emergency</h3>
-          <p>Call <value>105</strong> for non-emergency Police matters, including reporting a non-injury traffic crash.</p>
+          <p>Call <strong>105</strong> for non-emergency Police matters, including reporting a non-injury traffic crash.</p>
         </article>
         <article class="emergency-contact-item">
           <h3>ACC — Injury Support</h3>
@@ -981,49 +1031,6 @@ if (resourcesGrid) {
   }
 }
 
-// Build a table-of-contents for driving tips so users can jump quickly
-const drivingPageContent = document.querySelector('.driving-page-content');
-if (drivingTipsContainer && drivingPageContent) {
-  // When creating tips earlier we didn't set IDs; ensure each rendered tip has an id
-  const tipNodes = Array.from(drivingTipsContainer.querySelectorAll('.driving-tip'));
-  if (tipNodes.length === drivingTips.length) {
-    tipNodes.forEach((node, idx) => {
-      const title = drivingTips[idx].title || node.querySelector('h2')?.textContent || `section-${idx+1}`;
-      const slug = title.toLowerCase().replace(/[\s\/]+/g, '-').replace(/[^a-z0-9\-]/g, '');
-      node.id = slug;
-    });
-
-    // Create TOC nav
-    const existingToc = drivingPageContent.querySelector('.driving-toc');
-    if (!existingToc) {
-      const toc = document.createElement('nav');
-      toc.className = 'driving-toc';
-      const ul = document.createElement('ul');
-      drivingTips.forEach((tip) => {
-        const title = tip.title;
-        const slug = title.toLowerCase().replace(/[\s\/]+/g, '-').replace(/[^a-z0-9\-]/g, '');
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = `#${slug}`;
-        a.textContent = title;
-        li.appendChild(a);
-        ul.appendChild(li);
-      });
-      toc.appendChild(ul);
-
-      // Insert TOC after the H1 and before the driving description if present
-      const heading = drivingPageContent.querySelector('h1');
-      const desc = drivingPageContent.querySelector('.driving-description');
-      if (heading && desc) {
-        heading.parentNode.insertBefore(toc, desc);
-      } else if (heading) {
-        heading.parentNode.insertBefore(toc, heading.nextSibling);
-      } else {
-        drivingPageContent.insertBefore(toc, drivingPageContent.firstChild);
-      }
-    }
-  }
-}
 
 // =====================
 // Login / Sign-Up Page
@@ -1034,7 +1041,8 @@ const loginForm = document.getElementById('loginForm');
 
 const getStoredUsers = () => {
   try {
-    return JSON.parse(localStorage.getItem('drivehubUsers') || '[]');
+    const users = JSON.parse(localStorage.getItem('drivehubUsers') || '[]');
+    return Array.isArray(users) ? users : [];
   } catch (error) {
     return [];
   }
@@ -1070,6 +1078,11 @@ if (signupForm) {
       return;
     }
 
+    if (password.length < 8) {
+      showMessage('Your password must contain at least 8 characters.', true);
+      return;
+    }
+
     const users = getStoredUsers();
     const userExists = users.some((user) => user.email === email);
 
@@ -1078,10 +1091,11 @@ if (signupForm) {
       return;
     }
 
-    users.push({ name, email, password });
+    users.push({ name, email, password, createdAt: new Date().toISOString() });
     saveUsers(users);
     setLoggedInUser(email);
-    showMessage('Account created successfully. You can now log in.');
+    signupForm.reset();
+    showMessage(`Account created. You are signed in as ${name}.`);
   });
 }
 
@@ -1101,6 +1115,7 @@ if (loginForm) {
     }
 
     setLoggedInUser(email);
-    showMessage('Login successful.');
+    loginForm.reset();
+    showMessage(`Welcome back, ${matchingUser.name}!`);
   });
 }

@@ -637,19 +637,19 @@ p {
 
 .resource-links li {
     background: transparent;
-    border-left: 4px solid #f18988;
+    border-left: 4px solid #32d6a4;
     padding: 0.85rem 0.85rem 0.85rem 1rem;
     border-radius: 0.65rem;
 }
 
 .resource-links a {
-    color: #f18988;
+    color: #3a6696;
     font-weight: 700;
     text-decoration: underline;
 }
 
 .resource-links a:hover {
-    color: #c66166;
+    color: #1a4fb8;
 }
 
 .resource-links li p {
@@ -742,8 +742,8 @@ p {
     margin-top: 1.6rem;
     padding: 1.25rem 1.25rem 1.3rem;
     border-radius: 16px;
-    background: #eef2ff;
-    border: 1px solid #c7d2fe;
+    background: rgba(253, 203, 70, 0.58);
+    border: 1px solid #c99816;
 }
 
 .resource-remember h3 {
@@ -1016,7 +1016,7 @@ p {
     padding: 0.7rem 1rem;
     border-radius: 999px;
     background: rgba(58, 102, 150, 0.08);
-    color: #0b1220;
+    color: #3a6696;
     text-decoration: none;
     font-weight: 600;
     border: 1px solid rgba(58, 102, 150, 0.16);
@@ -1093,12 +1093,16 @@ body {
     box-shadow: 0 10px 30px rgba(50,214,164,0.12);
 }
 
-/* Make sure specific left/right overrides don't block the accent */
+/* Home action buttons use their own category colours on hover. */
 .action-box--left:hover .action-box-link,
+.action-box--left .action-box-link:hover {
+    background-color: #a878c2 !important;
+    color: #fff !important;
+}
+
 .action-box--right:hover .action-box-link,
-.action-box--left .action-box-link:hover,
 .action-box--right .action-box-link:hover {
-    background-color: var(--accent) !important;
+    background-color: #32d6a4 !important;
     color: #fff !important;
 }
 
