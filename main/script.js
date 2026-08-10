@@ -703,27 +703,164 @@ if (drivingTipsContainer) {
 const resources = [
   {
     title: 'Getting and Managing Your Licence',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    contact: '0800 000 000',
-    website: 'www.example.govt.nz'
+    description: 'Find official information about getting, renewing and managing your New Zealand driver licence. You can also book driving tests, find licensing agents and check licence requirements and fees.',
+    links: [
+      {
+        label: 'NZTA - Driver Licences',
+        href: 'https://www.nzta.govt.nz/driver-licences',
+        description: 'Information about getting, renewing and managing your licence.'
+      },
+      {
+        label: 'Book a Driving Test',
+        href: 'https://www.nzta.govt.nz/driver-licences/getting-a-licence/take-your-test',
+        description: 'Book, change or cancel a theory or practical test.'
+      },
+      {
+        label: 'Find a Driver Licensing Agent',
+        href: 'https://www.nzta.govt.nz/driver-licences/agents',
+        description: 'Find an agent where you can apply for or renew your licence.'
+      },
+      {
+        label: 'Driving Offences & Penalties',
+        href: 'https://www.nzta.govt.nz/driver-licences/driving-offences-and-penalties',
+        description: 'Information about demerit points, fines, suspensions and disqualifications.'
+      }
+    ],
+    contact: '0800 822 422',
+    hours: 'Monday-Friday, 8:00am-5:30pm'
   },
   {
     title: 'Car Accident Help',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    contact: '0800 111 111',
-    website: 'www.example.govt.nz'
+    description: 'If you are involved in a crash, make sure everyone is safe and get emergency assistance when needed. These resources explain what to do after a crash, how to report an incident and where to get support.',
+    links: [
+      {
+        label: 'NZ Police - Traffic Crash Reporting',
+        href: 'https://www.police.govt.nz/use-105/traffic-crash-report',
+        description: 'Information about reporting crashes.'
+      },
+      {
+        label: 'NZ Police - 105',
+        href: 'https://www.police.govt.nz/use-105',
+        description: 'Report non-emergency incidents to Police.'
+      },
+      {
+        label: 'ACC',
+        href: 'https://www.acc.org.nz',
+        description: 'Information about injury-related claims and support.'
+      },
+      {
+        label: 'NZTA',
+        href: 'https://www.nzta.govt.nz/driving-skills/learn-to-drive/roadcode/motorcycle-code/about-your-responsibilities/crashes?_searchAnalytics=eyJpbmRleE5hbWUiOiJuenRhMi1wcm9kLW1haW4tc2l0ZSIsInF1ZXJ5U3RyaW5nIjoiY3Jhc2hlcyIsImRvY3VtZW50SWQiOiJzaWx2ZXJzdHJpcGVfY21zX21vZGVsX3NpdGV0cmVlXzIwNDA2IiwicmVxdWVzdElkIjoiVUdONHF1RzlTOUt1cnBtRVIwbXRFdyJ9',
+        description: 'Information about road incidents and transport-related issues.'
+      }
+    ],
+    contact: '',
+    contactDetails: [
+      {
+        label: 'Emergency - Police, Fire or Ambulance',
+        value: '111'
+      },
+      {
+        label: 'Police non-emergency',
+        value: '105'
+      },
+      {
+        label: 'ACC claims',
+        value: '0800 101 996'
+      }
+    ],
+    emergencyNote: 'If someone is injured or there is immediate danger, call 111.',
+    hours: '',
+    website: ''
   },
   {
-    title: 'Road Tolls',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    contact: '0800 222 222',
-    website: 'www.example.govt.nz'
+    title: 'Road Tolls and Charges',
+    description: 'New Zealand has electronic toll roads where drivers are charged for using the road. You can pay a toll online, create a toll account, check your payments or pay a toll payment notice.',
+    links: [
+      {
+        label: 'NZTA - Tolls',
+        href: 'https://www.nzta.govt.nz/travelling-on-our-roads/toll-roads',
+        description: 'Pay or buy a toll and manage your toll account.'
+      },
+      {
+        label: 'Pay a Toll',
+        href: 'https://tollingonline.nzta.govt.nz/#/purchasetrips/prerequisites',
+        description: 'Pay for a recent toll-road trip.'
+      },
+      {
+        label: 'Toll Payment Notice',
+        href: 'https://tollingonline.nzta.govt.nz/#/notice/prerequisites',
+        description: 'Pay a notice if you did not pay within the required period.'
+      },
+      {
+        label: 'Toll Road Information',
+        href: 'https://www.nzta.govt.nz/travelling-on-our-roads/toll-roads/toll-road-information',
+        description: 'Find toll roads, prices and information about how tolling works.'
+      },
+      {
+        label: 'Toll Accounts',
+        href: 'https://tollingonline.nzta.govt.nz/#/create-account/account-type',
+        description: 'Create and manage an account for toll payments.'
+      }
+    ],
+    contact: '',
+    contactDetails: [
+      {
+        label: 'NZTA Tolling',
+        value: '0800 40 20 20'
+      }
+    ],
+    hours: '',
+    website: ''
   },
   {
-    title: 'About Your Car',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    contact: '0800 333 333',
-    website: 'www.example.govt.nz'
+    title: 'Your Car',
+    description: 'Keeping your vehicle safe, registered and road legal is an important part of being a responsible driver. Find information about WoF inspections, vehicle registration, vehicle licensing and other vehicle requirements.',
+    links: [
+      {
+        label: 'NZTA - Vehicles',
+        href: 'https://www.nzta.govt.nz/vehicles',
+        description: 'General vehicle information and requirements.'
+      },
+      {
+        label: 'Check Your Vehicle',
+        href: 'https://transact.nzta.govt.nz/v2/check-expiry',
+        description: 'Check vehicle licence, WoF and other vehicle information.'
+      },
+      {
+        label: 'Vehicle Registration (Rego)',
+        href: 'https://www.nzta.govt.nz/vehicles/licensing-rego',
+        description: 'Renew or manage your vehicle licence.'
+      },
+      {
+        label: 'Warrant of Fitness (WoF)',
+        href: 'https://www.nzta.govt.nz/vehicles/warrants-and-certificates',
+        description: 'Information about WoF requirements and inspections.'
+      },
+      {
+        label: 'Vehicle Safety',
+        href: 'https://www.nzta.govt.nz/vehicles/choosing-the-right-vehicle',
+        description: 'Learn about keeping your vehicle safe and roadworthy.'
+      },
+      {
+        label: 'Road User Charges',
+        href: 'https://www.nzta.govt.nz/vehicles/road-user-charges',
+        description: 'Information for vehicles that are required to pay RUC.'
+      }
+    ],
+    contact: '',
+    contactDetails: [
+      {
+        label: 'NZTA Motor Vehicle Licensing & Registration',
+        value: '0800 108 809'
+      },
+      {
+        label: 'NZTA Road User Charges',
+        value: '0800 655 644'
+      }
+    ],
+    hours: 'Monday-Friday, 8:00am-5:30pm',
+    website: ''
   }
 ];
 
@@ -734,17 +871,114 @@ if (resourcesGrid) {
     const resourceCard = document.createElement('article');
     resourceCard.className = 'resource-card';
 
+    const resourceId = resource.title
+      .toLowerCase()
+      .replace(/[\s\/]+/g, '-')
+      .replace(/[^a-z0-9\-]/g, '');
+    resourceCard.id = resourceId;
+
+    let linksHtml = '';
+    if (resource.links) {
+      linksHtml = `<ul class="resource-links">${resource.links
+        .map(
+          (link) => `
+        <li>
+          <a href="${link.href}" target="_blank" rel="noopener noreferrer"><strong>${link.label}</strong></a>
+          <p>${link.description}</p>
+        </li>`
+        )
+        .join('')}</ul>`;
+    }
+
+    const formatPhoneValue = (value) => {
+      const text = String(value).trim();
+      const digits = text.replace(/[^0-9+]/g, '');
+      return digits ? `<a href="tel:${digits}">${text}</a>` : text;
+    };
+
+    const contactHref = resource.contact ? resource.contact.replace(/[^0-9+]/g, '') : '';
+    const contactDetailsHtml = Array.isArray(resource.contactDetails)
+      ? resource.contactDetails
+          .map(
+            (detail) => `<p class="resource-contact-detail"><strong>${detail.label}:</strong> ${formatPhoneValue(detail.value)}</p>`
+          )
+          .join('')
+      : '';
+
     resourceCard.innerHTML = `
       <h2>${resource.title}</h2>
       <p>${resource.description}</p>
+      ${linksHtml}
       <div class="resource-details">
-        <p><strong>Contact:</strong> ${resource.contact}</p>
-        <p><strong>Website:</strong> <a href="https://${resource.website}" target="_blank" rel="noopener noreferrer">${resource.website}</a></p>
+        ${resource.contact ? `<p class="resource-contact"><strong>Contact:</strong> <a href="tel:${contactHref}">${resource.contact}</a></p>` : ''}
+        ${contactDetailsHtml}
+        ${resource.emergencyNote ? `<p class="resource-emergency-note">${resource.emergencyNote}</p>` : ''}
+        ${resource.hours ? `<p class="resource-hours"><strong>Hours:</strong> ${resource.hours}</p>` : ''}
+        ${resource.website ? `<p><strong>Website:</strong> <a href="https://${resource.website}" target="_blank" rel="noopener noreferrer">${resource.website}</a></p>` : ''}
       </div>
     `;
 
     resourcesGrid.appendChild(resourceCard);
   });
+
+  // Build a table of contents for resources sections.
+  const resourcesContent = document.querySelector('.resources-page-content');
+  if (resourcesContent) {
+    const existingToc = resourcesContent.querySelector('.driving-toc');
+    if (!existingToc) {
+      const toc = document.createElement('nav');
+      toc.className = 'driving-toc';
+      const ul = document.createElement('ul');
+
+      resources.forEach((resource) => {
+        const slug = resource.title
+          .toLowerCase()
+          .replace(/[\s\/]+/g, '-')
+          .replace(/[^a-z0-9\-]/g, '');
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `#${slug}`;
+        a.textContent = resource.title;
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+
+      toc.appendChild(ul);
+      const heading = resourcesContent.querySelector('h1');
+      if (heading) {
+        heading.parentNode.insertBefore(toc, heading.nextSibling);
+      } else {
+        resourcesContent.insertBefore(toc, resourcesContent.firstChild);
+      }
+    }
+
+    const emergencySection = document.createElement('section');
+    emergencySection.className = 'emergency-contacts-panel';
+    emergencySection.innerHTML = `
+      <h2>Emergency Contacts</h2>
+      <div class="emergency-contacts-grid">
+        <article class="emergency-contact-item">
+          <h3>111 — Emergency</h3>
+          <p>Call <strong>111</strong> for Police, Fire or Ambulance when there is an emergency or someone is in immediate danger.</p>
+        </article>
+        <article class="emergency-contact-item">
+          <h3>105 — Police Non-Emergency</h3>
+          <p>Call <value>105</strong> for non-emergency Police matters, including reporting a non-injury traffic crash.</p>
+        </article>
+        <article class="emergency-contact-item">
+          <h3>ACC — Injury Support</h3>
+          <p><strong>0800 101 996</strong></p>
+          <p>Contact ACC for questions about injury claims and support.</p>
+        </article>
+      </div>
+      <div class="resource-remember">
+        <h3>Remember</h3>
+        <p>DriveHub provides information and links to help you find the right resources. Driving laws and requirements can change, so always check the official NZTA, NZ Police or ACC website for the most up-to-date information.</p>
+      </div>
+    `;
+
+    resourcesContent.appendChild(emergencySection);
+  }
 }
 
 // Build a table-of-contents for driving tips so users can jump quickly
