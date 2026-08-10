@@ -1035,6 +1035,35 @@ if (resourcesGrid) {
 // =====================
 // Login / Sign-Up Page
 // =====================
+const authApp = document.getElementById('authApp');
+
+if (authApp) {
+  authApp.innerHTML = `
+    <section class="auth-page" aria-labelledby="authHeading">
+      <div class="auth-card">
+        <h1 id="authHeading">Access Theory Test Resources</h1>
+        <p>Create an account or log in to unlock resources to help you prepare for your theory test.</p>
+        <div id="authMessage" class="auth-message" role="status" aria-live="polite"></div>
+        <div class="auth-forms">
+          <form id="signupForm" class="auth-form">
+            <h2>Sign Up</h2>
+            <label>Full name<input type="text" id="signupName" name="signupName" autocomplete="name" required></label>
+            <label>Email<input type="email" id="signupEmail" name="signupEmail" autocomplete="email" required></label>
+            <label>Password<input type="password" id="signupPassword" name="signupPassword" autocomplete="new-password" minlength="8" required></label>
+            <button type="submit">Create Account</button>
+          </form>
+          <form id="loginForm" class="auth-form">
+            <h2>Login</h2>
+            <label>Email<input type="email" id="loginEmail" name="loginEmail" autocomplete="email" required></label>
+            <label>Password<input type="password" id="loginPassword" name="loginPassword" autocomplete="current-password" required></label>
+            <button type="submit">Login</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
 const authMessage = document.getElementById('authMessage');
 const signupForm = document.getElementById('signupForm');
 const loginForm = document.getElementById('loginForm');
@@ -1057,6 +1086,142 @@ const setLoggedInUser = (email) => {
 };
 
 const getLoggedInUser = () => localStorage.getItem('drivehubLoggedInUser');
+
+// =====================
+// Learner Dashboard Page
+// =====================
+const dashboardApp = document.getElementById('dashboardApp');
+
+if (dashboardApp) {
+  const email = getLoggedInUser();
+  const user = getStoredUsers().find((storedUser) => storedUser.email === email);
+
+  if (!user) {
+    window.location.replace('login.html');
+  } else {
+    const safeName = user.name.replace(/[&<>"']/g, (character) => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[character]));
+
+    dashboardApp.innerHTML = `
+      <section class="dashboard-page" aria-labelledby="dashboardHeading">
+        <div class="dashboard-card">
+          <p class="dashboard-eyebrow">Learner dashboard</p>
+          <h1 id="dashboardHeading">Welcome, ${safeName}!</h1>
+          <p>Choose where you would like to continue your driving journey.</p>
+          <div class="dashboard-actions">
+            <a href="license.html">Explore licences</a>
+            <a href="driving.html">Read driving tips</a>
+            <a href="resources.html">Resources</a>
+            <a href="practice-quiz.html">Practice theory test</a>
+            <a href="https://www.nzta.govt.nz/driving-skills/learn-to-drive/roadcode" target="_blank" rel="noopener noreferrer">NZ Road Code</a>
+          </div>
+          <button id="logoutButton" class="dashboard-logout" type="button">Log out</button>
+        </div>
+      </section>
+    `;
+
+    document.getElementById('logoutButton').addEventListener('click', () => {
+      localStorage.removeItem('drivehubLoggedInUser');
+      window.location.href = 'login.html';
+    });
+  }
+}
+
+// =====================
+// Practice Theory Test Page
+// =====================
+// Add your theory-test questions here. `correctAnswer` is the zero-based answer position.
+const practiceTheoryQuestions = [
+  {
+    question: 'Placeholder question 1: Add your theory-test question here.',
+    answers: ['Placeholder answer A', 'Placeholder answer B', 'Placeholder answer C'],
+    correctAnswer: 0
+  },
+  {
+    question: 'Placeholder question 2: Add your theory-test question here.',
+    answers: ['Placeholder answer A', 'Placeholder answer B', 'Placeholder answer C'],
+    correctAnswer: 1
+  },
+  {
+    question: 'Placeholder question 3: Add your theory-test question here.',
+    answers: ['Placeholder answer A', 'Placeholder answer B', 'Placeholder answer C'],
+    correctAnswer: 2
+  },
+  {
+    question: 'Placeholder question 4: Add your theory-test question here.',
+    answers: ['Placeholder answer A', 'Placeholder answer B', 'Placeholder answer C'],
+    correctAnswer: 0
+  },
+  {
+    question: 'Placeholder question 5: Add your theory-test question here.',
+    answers: ['Placeholder answer A', 'Placeholder answer B', 'Placeholder answer C'],
+    correctAnswer: 1
+  }
+];
+
+const quizApp = document.getElementById('quizApp');
+
+if (quizApp) {
+  if (!getLoggedInUser()) {
+    window.location.replace('login.html');
+  } else {
+    if (!practiceTheoryQuestions.length) {
+      quizApp.innerHTML = `
+        <section class="quiz-page" aria-labelledby="quizHeading">
+          <div class="quiz-card">
+            <p class="dashboard-eyebrow">Practice theory test</p>
+            <h1 id="quizHeading">Learner licence practice theory test</h1>
+            <p class="quiz-intro">Practice questions are being prepared. Check back soon to test your road-code knowledge.</p>
+            <a class="quiz-back" href="dashboard.html">Back to dashboard</a>
+          </div>
+        </section>
+      `;
+    } else {
+      quizApp.innerHTML = `
+      <section class="quiz-page" aria-labelledby="quizHeading">
+        <div class="quiz-card">
+          <p class="dashboard-eyebrow">Practice theory test</p>
+          <h1 id="quizHeading">Learner licence practice theory test</h1>
+          <p class="quiz-intro">Answer every question, then submit your test to see your result. This practice test is not an official NZTA theory test.</p>
+          <form id="practiceQuizForm">
+            ${practiceTheoryQuestions.map((item, questionIndex) => `
+              <fieldset class="quiz-question">
+                <legend>${questionIndex + 1}. ${item.question}</legend>
+                ${item.answers.map((answer, answerIndex) => `
+                  <label><input type="radio" name="question${questionIndex}" value="${answerIndex}"> ${answer}</label>
+                `).join('')}
+              </fieldset>
+            `).join('')}
+            <button class="quiz-submit" type="submit">Submit test</button>
+          </form>
+          <div id="quizResult" class="quiz-result" role="status" aria-live="polite"></div>
+          <a class="quiz-back" href="dashboard.html">Back to dashboard</a>
+        </div>
+      </section>
+      `;
+
+      document.getElementById('practiceQuizForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+
+        if (practiceTheoryQuestions.some((_, index) => !formData.has(`question${index}`))) {
+          document.getElementById('quizResult').textContent = 'Please answer every question before submitting your test.';
+          return;
+        }
+
+        const score = practiceTheoryQuestions.reduce((total, item, index) => (
+          total + (Number(formData.get(`question${index}`)) === item.correctAnswer ? 1 : 0)
+        ), 0);
+        document.getElementById('quizResult').textContent = `You scored ${score} out of ${practiceTheoryQuestions.length}. ${score === practiceTheoryQuestions.length ? 'Excellent work!' : 'Review the Road Code and try again.'}`;
+      });
+    }
+  }
+}
 
 const showMessage = (message, isError = false) => {
   if (authMessage) {
@@ -1096,6 +1261,7 @@ if (signupForm) {
     setLoggedInUser(email);
     signupForm.reset();
     showMessage(`Account created. You are signed in as ${name}.`);
+    window.location.href = 'dashboard.html';
   });
 }
 
@@ -1117,5 +1283,6 @@ if (loginForm) {
     setLoggedInUser(email);
     loginForm.reset();
     showMessage(`Welcome back, ${matchingUser.name}!`);
+    window.location.href = 'dashboard.html';
   });
 }
