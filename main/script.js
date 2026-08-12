@@ -12,6 +12,7 @@ if (location.hash) {
   try { window.scrollTo(0, 0); } catch (e) {}
 }
 
+// Advanced technique: non-trivial string manipulation splits the URL path to identify this page.
 const currentPage = window.location.pathname.split('/').pop() || "home.html";
 const navLinks = document.querySelectorAll('.nav-links a');
 
@@ -105,6 +106,7 @@ const homeSectionData = {
   ]
 };
 
+// Advanced technique: GUI event runs this code once the page's HTML has loaded.
 document.addEventListener('DOMContentLoaded', () => {
   // =====================
   // Home Section Feauture Boxes
@@ -414,7 +416,7 @@ function smoothScrollToId(id) {
   window.scrollTo({ top, behavior: 'smooth' });
 }
 
-// Licnse note
+// License note
 document.addEventListener('DOMContentLoaded', () => {
   try {
     const note = document.querySelector('.license-note');
@@ -1033,32 +1035,36 @@ if (resourcesGrid) {
 
 
 // =====================
-// Login / Sign-Up Page
+// Login / V3
 // =====================
-const authApp = document.getElementById('authApp');
+const authWelcomeApp = document.getElementById('authWelcomeApp');
 
-if (authApp) {
-  authApp.innerHTML = `
-    <section class="auth-page" aria-labelledby="authHeading">
-      <div class="auth-card">
-        <h1 id="authHeading">Access Theory Test Resources</h1>
-        <p>Create an account or log in to unlock resources to help you prepare for your theory test.</p>
-        <div id="authMessage" class="auth-message" role="status" aria-live="polite"></div>
-        <div class="auth-forms">
-          <form id="signupForm" class="auth-form">
-            <h2>Sign Up</h2>
-            <label>Full name<input type="text" id="signupName" name="signupName" autocomplete="name" required></label>
-            <label>Email<input type="email" id="signupEmail" name="signupEmail" autocomplete="email" required></label>
-            <label>Password<input type="password" id="signupPassword" name="signupPassword" autocomplete="new-password" minlength="8" required></label>
-            <button type="submit">Create Account</button>
-          </form>
-          <form id="loginForm" class="auth-form">
-            <h2>Login</h2>
-            <label>Email<input type="email" id="loginEmail" name="loginEmail" autocomplete="email" required></label>
-            <label>Password<input type="password" id="loginPassword" name="loginPassword" autocomplete="current-password" required></label>
-            <button type="submit">Login</button>
-          </form>
-        </div>
+if (authWelcomeApp) {
+  authWelcomeApp.innerHTML = `
+    <section class="auth-welcome-page" aria-labelledby="welcomeHeading">
+      <header>
+        <p>DriveHub</p>
+        <h1 id="welcomeHeading">Your learner hub, all in one place.</h1>
+        <span>Sign up to begin, or log in to continue.</span>
+      </header>
+      <div id="authMessage" class="auth-message" role="status" aria-live="polite"></div>
+      <div class="auth-welcome-forms">
+        <form id="signupForm" class="auth-form">
+          <h2>New here?</h2>
+          <p>Create your learner account.</p>
+          <label>Full name<input type="text" id="signupName" name="signupName" autocomplete="name" required></label>
+          <label>Birthday<input type="date" id="signupBirthday" name="signupBirthday" autocomplete="bday" required></label>
+          <label>Email<input type="email" id="signupEmail" name="signupEmail" autocomplete="email" required></label>
+          <label>Password<input type="password" id="signupPassword" name="signupPassword" autocomplete="new-password" minlength="8" required></label>
+          <button type="submit">Sign up</button>
+        </form>
+        <form id="loginForm" class="auth-form">
+          <h2>Already learning?</h2>
+          <p>Pick up where you left off.</p>
+          <label>Email<input type="email" id="loginEmail" name="loginEmail" autocomplete="email" required></label>
+          <label>Password<input type="password" id="loginPassword" name="loginPassword" autocomplete="current-password" required></label>
+          <button type="submit">Log in</button>
+        </form>
       </div>
     </section>
   `;
@@ -1077,6 +1083,7 @@ const getStoredUsers = () => {
   }
 };
 
+// Advanced technique: function with a parameter saves the supplied users collection.
 const saveUsers = (users) => {
   localStorage.setItem('drivehubUsers', JSON.stringify(users));
 };
@@ -1088,11 +1095,11 @@ const setLoggedInUser = (email) => {
 const getLoggedInUser = () => localStorage.getItem('drivehubLoggedInUser');
 
 // =====================
-// Learner Dashboard Page
+// Learner Dashboard Layout 2
 // =====================
-const dashboardApp = document.getElementById('dashboardApp');
+const dashboardV2App = document.getElementById('dashboardV2App');
 
-if (dashboardApp) {
+if (dashboardV2App) {
   const email = getLoggedInUser();
   const user = getStoredUsers().find((storedUser) => storedUser.email === email);
 
@@ -1107,25 +1114,33 @@ if (dashboardApp) {
       "'": '&#39;'
     }[character]));
 
-    dashboardApp.innerHTML = `
-      <section class="dashboard-page" aria-labelledby="dashboardHeading">
-        <div class="dashboard-card">
-          <p class="dashboard-eyebrow">Learner dashboard</p>
-          <h1 id="dashboardHeading">Welcome, ${safeName}!</h1>
-          <p>Choose where you would like to continue your driving journey.</p>
-          <div class="dashboard-actions">
-            <a href="license.html">Explore licences</a>
-            <a href="driving.html">Read driving tips</a>
-            <a href="resources.html">Resources</a>
-            <a href="practice-quiz.html">Practice theory test</a>
-            <a href="https://www.nzta.govt.nz/driving-skills/learn-to-drive/roadcode" target="_blank" rel="noopener noreferrer">NZ Road Code</a>
+    dashboardV2App.innerHTML = `
+      <section class="dashboard-v2-page" aria-labelledby="dashboardV2Heading">
+        <header class="dashboard-v2-hero">
+          <div>
+            <p>Learner dashboard · layout </p>
+            <h1 id="dashboardV2Heading">Ready for the road, ${safeName}?</h1>
           </div>
-          <button id="logoutButton" class="dashboard-logout" type="button">Log out</button>
+        </header>
+        <div class="dashboard-v2-main">
+          <a class="dashboard-v2-feature" href="practice-quiz.html">
+            <span>Start here</span>
+            <strong>Practice theory test</strong>
+            <small>Work through your questions and review your score.</small>
+            <b>Begin practice →</b>
+          </a>
+          <div class="dashboard-v2-actions">
+            <a href="license.html"><strong>Licences</strong><small>Explore the learner licence journey.</small></a>
+            <a href="driving.html"><strong>Driving tips</strong><small>Build confidence with useful advice.</small></a>
+            <a href="resources.html"><strong>Resources</strong><small>Find important driving information.</small></a>
+            <a href="https://www.nzta.govt.nz/driving-skills/learn-to-drive/roadcode" target="_blank" rel="noopener noreferrer"><strong>NZ Road Code</strong><small>Read the official NZTA guide.</small></a>
+          </div>
         </div>
+        <button id="logoutButtonV2" class="dashboard-v2-logout" type="button">Log out</button>
       </section>
     `;
 
-    document.getElementById('logoutButton').addEventListener('click', () => {
+    document.getElementById('logoutButtonV2').addEventListener('click', () => {
       localStorage.removeItem('drivehubLoggedInUser');
       window.location.href = 'login.html';
     });
@@ -1136,31 +1151,37 @@ if (dashboardApp) {
 // Practice Theory Test Page
 // =====================
 // Add your theory-test questions here. `correctAnswer` is the zero-based answer position.
+// Advanced technique: multidimensional collection. Each question object contains an answers array.
 const practiceTheoryQuestions = [
   {
     question: 'Placeholder question 1: Add your theory-test question here.',
     answers: ['Placeholder answer A', 'Placeholder answer B', 'Placeholder answer C'],
-    correctAnswer: 0
+    correctAnswer: 0,
+    explanation: 'Add an explanation of why the correct answer is right here.'
   },
   {
     question: 'Placeholder question 2: Add your theory-test question here.',
     answers: ['Placeholder answer A', 'Placeholder answer B', 'Placeholder answer C'],
-    correctAnswer: 1
+    correctAnswer: 1,
+    explanation: 'Add an explanation of why the correct answer is right here.'
   },
   {
     question: 'Placeholder question 3: Add your theory-test question here.',
     answers: ['Placeholder answer A', 'Placeholder answer B', 'Placeholder answer C'],
-    correctAnswer: 2
+    correctAnswer: 2,
+    explanation: 'Add an explanation of why the correct answer is right here.'
   },
   {
     question: 'Placeholder question 4: Add your theory-test question here.',
     answers: ['Placeholder answer A', 'Placeholder answer B', 'Placeholder answer C'],
-    correctAnswer: 0
+    correctAnswer: 0,
+    explanation: 'Add an explanation of why the correct answer is right here.'
   },
   {
     question: 'Placeholder question 5: Add your theory-test question here.',
     answers: ['Placeholder answer A', 'Placeholder answer B', 'Placeholder answer C'],
-    correctAnswer: 1
+    correctAnswer: 1,
+    explanation: 'Add an explanation of why the correct answer is right here.'
   }
 ];
 
@@ -1205,6 +1226,7 @@ if (quizApp) {
       </section>
       `;
 
+      // Advanced technique: GUI event responds when the learner submits the quiz form.
       document.getElementById('practiceQuizForm').addEventListener('submit', (event) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
@@ -1223,6 +1245,74 @@ if (quizApp) {
   }
 }
 
+// =====================
+// Theory Test With Immediate Feedback
+// =====================
+const feedbackQuizApp = document.getElementById('feedbackQuizApp');
+
+if (feedbackQuizApp) {
+  if (!getLoggedInUser()) {
+    window.location.replace('login.html');
+  } else {
+    feedbackQuizApp.innerHTML = `
+      <section class="quiz-page" aria-labelledby="feedbackQuizHeading">
+        <div class="quiz-card quiz-card--feedback">
+          <p class="dashboard-eyebrow">Practice theory test</p>
+          <h1 id="feedbackQuizHeading">Learn as you go</h1>
+          <p class="quiz-intro">You will see whether each answer is correct as soon as you choose it, along with an explanation.</p>
+          <form id="feedbackQuizForm">
+            ${practiceTheoryQuestions.map((item, questionIndex) => `
+              <fieldset class="quiz-question" data-question="${questionIndex}">
+                <legend>${questionIndex + 1}. ${item.question}</legend>
+                ${item.answers.map((answer, answerIndex) => `
+                  <label><input type="radio" name="question${questionIndex}" value="${answerIndex}"> ${answer}</label>
+                `).join('')}
+                <p class="quiz-feedback" aria-live="polite"></p>
+              </fieldset>
+            `).join('')}
+            <button class="quiz-submit" type="submit">See score</button>
+          </form>
+          <div id="feedbackQuizResult" class="quiz-result" role="status" aria-live="polite"></div>
+          <a class="quiz-back" href="dashboard.html">Back to dashboard</a>
+        </div>
+      </section>
+    `;
+
+    const feedbackQuizForm = document.getElementById('feedbackQuizForm');
+    // Advanced technique: GUI event provides immediate feedback when a learner changes an answer.
+    feedbackQuizForm.addEventListener('change', (event) => {
+      if (!event.target.matches('input[type="radio"]')) return;
+
+      const questionIndex = Number(event.target.name.replace('question', ''));
+      const question = practiceTheoryQuestions[questionIndex];
+      const questionCard = event.target.closest('.quiz-question');
+      const feedback = questionCard.querySelector('.quiz-feedback');
+      const isCorrect = Number(event.target.value) === question.correctAnswer;
+      questionCard.classList.toggle('is-correct', isCorrect);
+      questionCard.classList.toggle('is-incorrect', !isCorrect);
+      feedback.className = `quiz-feedback ${isCorrect ? 'is-correct' : 'is-incorrect'}`;
+      feedback.textContent = isCorrect
+        ? `Correct. ${question.explanation || ''}`
+        : `Not quite. The correct answer is: ${question.answers[question.correctAnswer]}. ${question.explanation || ''}`;
+    });
+
+    feedbackQuizForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      const result = document.getElementById('feedbackQuizResult');
+      if (practiceTheoryQuestions.some((_, index) => !formData.has(`question${index}`))) {
+        result.textContent = 'Please answer every question to see your score.';
+        return;
+      }
+      const score = practiceTheoryQuestions.reduce((total, item, index) => (
+        total + (Number(formData.get(`question${index}`)) === item.correctAnswer ? 1 : 0)
+      ), 0);
+      result.textContent = `You scored ${score} out of ${practiceTheoryQuestions.length}.`;
+    });
+  }
+}
+
+// Advanced technique: function with parameters changes the message and whether it is styled as an error.
 const showMessage = (message, isError = false) => {
   if (authMessage) {
     authMessage.textContent = message;
@@ -1230,15 +1320,18 @@ const showMessage = (message, isError = false) => {
   }
 };
 
+// Advanced technique: GUI event responds to the user submitting the sign-up form.
 if (signupForm) {
   signupForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const name = document.getElementById('signupName').value.trim();
+    const birthday = document.getElementById('signupBirthday').value;
+    // Advanced technique: non-trivial string manipulation removes extra spaces and standardises the email.
     const email = document.getElementById('signupEmail').value.trim().toLowerCase();
     const password = document.getElementById('signupPassword').value;
 
-    if (!name || !email || !password) {
+    if (!name || !birthday || !email || !password) {
       showMessage('Please fill in all sign-up fields.', true);
       return;
     }
@@ -1256,7 +1349,8 @@ if (signupForm) {
       return;
     }
 
-    users.push({ name, email, password, createdAt: new Date().toISOString() });
+    // Advanced technique: modifying a collection by adding the new user's object to the users array.
+    users.push({ name, birthday, email, password, createdAt: new Date().toISOString() });
     saveUsers(users);
     setLoggedInUser(email);
     signupForm.reset();
@@ -1265,6 +1359,7 @@ if (signupForm) {
   });
 }
 
+// Advanced technique: GUI event responds to the user submitting the login form.
 if (loginForm) {
   loginForm.addEventListener('submit', (event) => {
     event.preventDefault();
