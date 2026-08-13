@@ -1337,8 +1337,8 @@ if (feedbackQuizApp) {
       <section class="quiz-page" aria-labelledby="feedbackQuizHeading">
         <div class="quiz-card quiz-card--feedback">
           <p class="dashboard-eyebrow">Practice theory test</p>
-          <h1 id="feedbackQuizHeading">Learn as you go</h1>
-          <p class="quiz-intro">You will see whether each answer is correct as soon as you choose it, along with an explanation.</p>
+          <h1 id="feedbackQuizHeading">Test your Road Code knowledge</h1>
+          <p class="quiz-intro">Practice your knowledge to pass the learner theory test.</p>
           <form id="feedbackQuizForm">
             ${practiceTheoryQuestions.map((item, questionIndex) => `
               <fieldset class="quiz-question" data-question="${questionIndex}">
@@ -1359,21 +1359,29 @@ if (feedbackQuizApp) {
 
     const feedbackQuizForm = document.getElementById('feedbackQuizForm');
     // Advanced technique: GUI event provides immediate feedback when a learner changes an answer.
-    feedbackQuizForm.addEventListener('change', (event) => {
-      if (!event.target.matches('input[type="radio"]')) return;
+feedbackQuizForm.addEventListener('change', (event) => {
+  if (!event.target.matches('input[type="radio"]')) return;
 
-      const questionIndex = Number(event.target.name.replace('question', ''));
-      const question = practiceTheoryQuestions[questionIndex];
-      const questionCard = event.target.closest('.quiz-question');
-      const feedback = questionCard.querySelector('.quiz-feedback');
-      const isCorrect = Number(event.target.value) === question.correctAnswer;
-      questionCard.classList.toggle('is-correct', isCorrect);
-      questionCard.classList.toggle('is-incorrect', !isCorrect);
-      feedback.className = `quiz-feedback ${isCorrect ? 'is-correct' : 'is-incorrect'}`;
-      feedback.textContent = isCorrect
-        ? `Correct. ${question.explanation || ''}`
-        : `Not quite. The correct answer is: ${question.answers[question.correctAnswer]}. ${question.explanation || ''}`;
-    });
+  const questionIndex = Number(event.target.name.replace('question', ''));
+  const question = practiceTheoryQuestions[questionIndex];
+  const questionCard = event.target.closest('.quiz-question');
+  const feedback = questionCard.querySelector('.quiz-feedback');
+  const isCorrect = Number(event.target.value) === question.correctAnswer;
+
+  questionCard.classList.toggle('is-correct', isCorrect);
+  questionCard.classList.toggle('is-incorrect', !isCorrect);
+
+  feedback.className = `quiz-feedback ${isCorrect ? 'is-correct' : 'is-incorrect'}`;
+
+  feedback.textContent = isCorrect
+    ? `Correct. ${question.explanation || ''}`
+    : `Not quite. The correct answer is: ${question.answers[question.correctAnswer]}. ${question.explanation || ''}`;
+
+  // Lock the question after the first answer is selected
+  questionCard.querySelectorAll('input[type="radio"]').forEach((radio) => {
+    radio.disabled = true;
+  });
+});
 
     feedbackQuizForm.addEventListener('submit', (event) => {
       event.preventDefault();
@@ -1391,6 +1399,8 @@ if (feedbackQuizApp) {
   }
 }
 
+
+// Sign Up/Login Functions
 // Advanced technique: function with parameters changes the message and whether it is styled as an error.
 const showMessage = (message, isError = false) => {
   if (authMessage) {
@@ -1445,6 +1455,11 @@ if (birthdayDate < maximumAgeDate) {
       showMessage('Full name must not exceed 50 characters.', true);
       return;
     }
+
+    if (!/^[A-Za-zÀ-ÖØ-öø-ÿ -]+$/.test(name)) {
+  showMessage('Full name can only contain letters, spaces and hyphens.', true);
+  return;
+}
 
     if (!name || !birthday || !email || !password) {
       showMessage('Please fill in all sign-up fields.', true);
