@@ -1407,6 +1407,12 @@ if (signupForm) {
     const name = document.getElementById('signupName').value.trim();
     const birthday = document.getElementById('signupBirthday').value;
 
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(birthday)) {
+  showMessage('Invalid birthday. Please enter a valid date.', true);
+  return;
+}
+
+
     const birthdayDate = new Date(birthday);
 const today = new Date();
 
