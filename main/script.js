@@ -1073,7 +1073,6 @@ if (authWelcomeApp) {
 const authMessage = document.getElementById('authMessage');
 const signupForm = document.getElementById('signupForm');
 const loginForm = document.getElementById('loginForm');
-
 const getStoredUsers = () => {
   try {
     const users = JSON.parse(localStorage.getItem('drivehubUsers') || '[]');
@@ -1082,6 +1081,7 @@ const getStoredUsers = () => {
     return [];
   }
 };
+
 
 // Advanced technique: function with a parameter saves the supplied users collection.
 const saveUsers = (users) => {
@@ -1154,37 +1154,116 @@ if (dashboardV2App) {
 // Advanced technique: multidimensional collection. Each question object contains an answers array.
 const practiceTheoryQuestions = [
   {
-    question: 'Placeholder question 1: Add your theory-test question here.',
-    answers: ['Placeholder answer A', 'Placeholder answer B', 'Placeholder answer C'],
+    question: 'On your learner licence, where must your supervisor sit while you are driving?',
+    answers: [
+      'In the front passenger seat beside you',
+      'In any seat, as long as they can see you drive',
+      'In the back seat behind the driver',
+      'You can drive alone during the day'
+    ],
     correctAnswer: 0,
-    explanation: 'Add an explanation of why the correct answer is right here.'
+    explanation: 'A learner driver must have a supervisor sitting in the front passenger seat beside them.'
   },
   {
-    question: 'Placeholder question 2: Add your theory-test question here.',
-    answers: ['Placeholder answer A', 'Placeholder answer B', 'Placeholder answer C'],
+    question: 'If you are driving a car, what should you do when following another vehicle in wet conditions?',
+    answers: [
+      'Observe the two-second rule',
+      'Observe the four-second rule',
+      'Observe the six-second rule',
+      'Try to overtake so you are not blinded by spray'
+    ],
     correctAnswer: 1,
-    explanation: 'Add an explanation of why the correct answer is right here.'
+    explanation: 'Wet roads increase stopping distance, so you need a four-second following gap.'
   },
   {
-    question: 'Placeholder question 3: Add your theory-test question here.',
-    answers: ['Placeholder answer A', 'Placeholder answer B', 'Placeholder answer C'],
+    question: 'Before overtaking another vehicle, what must you be able to see?',
+    answers: [
+      'At least 100 metres of clear road for the whole time you are passing',
+      'Only the vehicle directly in front of you',
+      'A clear road for the first few seconds of the pass',
+      'A passing lane somewhere ahead'
+    ],
+    correctAnswer: 0,
+    explanation: 'You must be able to see at least 100 metres of clear road ahead for the entire pass.'
+  },
+  {
+    question: 'In daylight, what must a load that projects more than 1 metre beyond the rear of a vehicle display?',
+    answers: [
+      'A clean white or fluorescent red, orange or yellow flag',
+      'Nothing, if the load is tied down',
+      'Only the vehicle hazard lights',
+      'A blue flag'
+    ],
+    correctAnswer: 0,
+    explanation: 'A projecting load over 1 metre must display a clearly visible warning flag.'
+  },
+  {
+    question: 'When you are turning right at an intersection, who must you give way to?',
+    answers: [
+      'Vehicles coming towards you that are going straight ahead or turning left',
+      'Only vehicles behind you',
+      'Nobody, because you are turning right',
+      'Only vehicles turning right'
+    ],
+    correctAnswer: 0,
+    explanation: 'You must give way to oncoming vehicles going straight or turning left.'
+  },
+  {
+    question: 'Under normal driving conditions, what rule should you use to allow a safe following distance?',
+    answers: [
+      'The one-second rule',
+      'The two-second rule',
+      'The four-second rule',
+      'The six-second rule'
+    ],
+    correctAnswer: 1,
+    explanation: 'Use the two-second rule under normal conditions.'
+  },
+  {
+    question: 'What should you do if sun glare makes it difficult to see while driving?',
+    answers: [
+      'Keep driving at the same speed and look away from the sun',
+      'Speed up to get through the glare faster',
+      'Use a sun visor or sunglasses, slow down, and safely pull over if needed',
+      'Turn off your headlights'
+    ],
     correctAnswer: 2,
-    explanation: 'Add an explanation of why the correct answer is right here.'
+    explanation: 'Sun glare reduces visibility — use a visor, adjust speed, or pull over safely.'
   },
   {
-    question: 'Placeholder question 4: Add your theory-test question here.',
-    answers: ['Placeholder answer A', 'Placeholder answer B', 'Placeholder answer C'],
+    question: 'When entering a roundabout, who must you give way to?',
+    answers: [
+      'Vehicles that will cross your path from your right',
+      'Vehicles approaching from your left only',
+      'Vehicles behind you',
+      'No one if you are going straight through'
+    ],
     correctAnswer: 0,
-    explanation: 'Add an explanation of why the correct answer is right here.'
+    explanation: 'Give way to vehicles crossing your path from the right.'
   },
   {
-    question: 'Placeholder question 5: Add your theory-test question here.',
-    answers: ['Placeholder answer A', 'Placeholder answer B', 'Placeholder answer C'],
-    correctAnswer: 1,
-    explanation: 'Add an explanation of why the correct answer is right here.'
+    question: 'At a T-intersection, who must give way?',
+    answers: [
+      'Traffic on the road that ends must give way to traffic on the continuing road',
+      'Traffic on the continuing road must always give way',
+      'The vehicle turning left must always give way',
+      'The largest vehicle has the right of way'
+    ],
+    correctAnswer: 0,
+    explanation: 'Traffic on the terminating road must give way to traffic on the continuing road.'
+  },
+  {
+    question: 'What must you display on a car when driving on a learner licence?',
+    answers: [
+      'L plates on the front and rear of the car',
+      'A restricted licence plate on the rear only',
+      'A full licence plate on the front only',
+      'No plates, if a supervisor is in the car'
+    ],
+    correctAnswer: 0,
+    explanation: 'Learner drivers must display L plates on the front and rear.'
   }
 ];
-
 const quizApp = document.getElementById('quizApp');
 
 if (quizApp) {
@@ -1330,6 +1409,11 @@ if (signupForm) {
     // Advanced technique: non-trivial string manipulation removes extra spaces and standardises the email.
     const email = document.getElementById('signupEmail').value.trim().toLowerCase();
     const password = document.getElementById('signupPassword').value;
+
+      if (name.length > 50) {
+      showMessage('Full name must not exceed 50 characters.', true);
+      return;
+    }
 
     if (!name || !birthday || !email || !password) {
       showMessage('Please fill in all sign-up fields.', true);
