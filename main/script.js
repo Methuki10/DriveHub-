@@ -1,15 +1,17 @@
 //DriveHub
 
+/* jshint esversion: 6 */
+
 // Smooth Scroolling 
 let _initialHashId = '';
 if (location.hash) {
   _initialHashId = location.hash.replace('#', '');
   try {
     history.replaceState(null, '', location.pathname + location.search);
-  } catch (err) {
+  } catch {
     // ignore
   }
-  try { window.scrollTo(0, 0); } catch (e) {}
+  try { window.scrollTo(0, 0); } catch {}
 }
 
 // Advanced technique: non-trivial string manipulation splits the URL path to identify this page.
@@ -428,7 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (_initialHashId) {
       setTimeout(() => smoothScrollToId(_initialHashId), 80);
     }
-  } catch (err) {
+  } catch {
     // fail silently
   }
 });
@@ -445,7 +447,7 @@ document.addEventListener('click', (e) => {
       // Do not write the hash into history; just smooth-scroll
       smoothScrollToId(id);
     }
-  } catch (err) {
+  } catch {
     // ignore malformed URLs
   }
 });
@@ -471,7 +473,7 @@ document.addEventListener('click', (e) => {
         }
       }
     }
-  } catch (err) {
+  } catch{
     // ignore
   }
   
@@ -1052,17 +1054,17 @@ if (authWelcomeApp) {
         <form id="signupForm" class="auth-form">
           <h2>New here?</h2>
           <p>Create your learner account.</p>
-          <label>Full name<input type="text" id="signupName" name="signupName" autocomplete="name" required></label>
+          <label>Full name<input type="text" id="signupName" name="signupName" autocomplete="name"  placeholder="Enter your full name" required></label>
           <label>Birthday<input type="date" id="signupBirthday" name="signupBirthday" autocomplete="bday" required></label>
-          <label>Email<input type="email" id="signupEmail" name="signupEmail" autocomplete="email" required></label>
-          <label>Password<input type="password" id="signupPassword" name="signupPassword" autocomplete="new-password" minlength="8" required></label>
+          <label>Email<input type="email" id="signupEmail" name="signupEmail" autocomplete="email" placeholder="example@email.com" required></label>
+          <label>Password<input type="password" id="signupPassword" name="signupPassword" autocomplete="new-password" minlength="8"  placeholder="At least 8 characters" required></label>
           <button type="submit">Sign up</button>
         </form>
         <form id="loginForm" class="auth-form">
           <h2>Already learning?</h2>
           <p>Pick up where you left off.</p>
-          <label>Email<input type="email" id="loginEmail" name="loginEmail" autocomplete="email" required></label>
-          <label>Password<input type="password" id="loginPassword" name="loginPassword" autocomplete="current-password" required></label>
+          <label>Email<input type="email" id="loginEmail" name="loginEmail" autocomplete="email" placeholder="Enter your email" required></label>
+          <label>Password<input type="password" id="loginPassword" name="loginPassword" autocomplete="current-password" placeholder="Enter your password" required></label>
           <button type="submit">Log in</button>
         </form>
       </div>
@@ -1077,7 +1079,7 @@ const getStoredUsers = () => {
   try {
     const users = JSON.parse(localStorage.getItem('drivehubUsers') || '[]');
     return Array.isArray(users) ? users : [];
-  } catch (error) {
+  } catch {
     return [];
   }
 };
@@ -1323,7 +1325,6 @@ if (quizApp) {
     }
   }
 }
-
 // =====================
 // Theory Test With Immediate Feedback
 // =====================
@@ -1344,13 +1345,17 @@ if (feedbackQuizApp) {
               <fieldset class="quiz-question" data-question="${questionIndex}">
                 <legend>${questionIndex + 1}. ${item.question}</legend>
                 ${item.answers.map((answer, answerIndex) => `
-                  <label><input type="radio" name="question${questionIndex}" value="${answerIndex}"> ${answer}</label>
+                  <label>
+                    <input type="radio" name="question${questionIndex}" value="${answerIndex}">
+                    ${answer}
+                  </label>
                 `).join('')}
                 <p class="quiz-feedback" aria-live="polite"></p>
               </fieldset>
             `).join('')}
             <button class="quiz-submit" type="submit">See score</button>
           </form>
+
           <div id="feedbackQuizResult" class="quiz-result" role="status" aria-live="polite"></div>
           <a class="quiz-back" href="dashboard.html">Back to dashboard</a>
         </div>
@@ -1358,49 +1363,57 @@ if (feedbackQuizApp) {
     `;
 
     const feedbackQuizForm = document.getElementById('feedbackQuizForm');
-    // Advanced technique: GUI event provides immediate feedback when a learner changes an answer.
-feedbackQuizForm.addEventListener('change', (event) => {
-  if (!event.target.matches('input[type="radio"]')) return;
 
-  const questionIndex = Number(event.target.name.replace('question', ''));
-  const question = practiceTheoryQuestions[questionIndex];
-  const questionCard = event.target.closest('.quiz-question');
-  const feedback = questionCard.querySelector('.quiz-feedback');
-  const isCorrect = Number(event.target.value) === question.correctAnswer;
+    // Advanced technique: GUI event provides immediate feedback when a learner chooses an answer.
+    feedbackQuizForm.addEventListener('change', (event) => {
+      if (!event.target.matches('input[type="radio"]')) return;
 
-  questionCard.classList.toggle('is-correct', isCorrect);
-  questionCard.classList.toggle('is-incorrect', !isCorrect);
+      const questionIndex = Number(event.target.name.replace('question', ''));
+      const question = practiceTheoryQuestions[questionIndex];
+      const questionCard = event.target.closest('.quiz-question');
+      const feedback = questionCard.querySelector('.quiz-feedback');
+      const isCorrect = Number(event.target.value) === question.correctAnswer;
 
-  feedback.className = `quiz-feedback ${isCorrect ? 'is-correct' : 'is-incorrect'}`;
+      questionCard.classList.toggle('is-correct', isCorrect);
+      questionCard.classList.toggle('is-incorrect', !isCorrect);
 
-  feedback.textContent = isCorrect
-    ? `Correct. ${question.explanation || ''}`
-    : `Not quite. The correct answer is: ${question.answers[question.correctAnswer]}. ${question.explanation || ''}`;
+      feedback.className = `quiz-feedback ${isCorrect ? 'is-correct' : 'is-incorrect'}`;
 
-  // Lock the question after the first answer is selected
-  questionCard.querySelectorAll('input[type="radio"]').forEach((radio) => {
-    radio.disabled = true;
-  });
-});
+      feedback.textContent = isCorrect
+        ? `Correct. ${question.explanation || ''}`
+        : `Not quite. The correct answer is: ${question.answers[question.correctAnswer]}. ${question.explanation || ''}`;
+
+      // Lock the question after the first answer is selected.
+      questionCard.querySelectorAll('input[type="radio"]').forEach((radio) => {
+        radio.disabled = true;
+      });
+    });
 
     feedbackQuizForm.addEventListener('submit', (event) => {
       event.preventDefault();
+
       const formData = new FormData(event.currentTarget);
       const result = document.getElementById('feedbackQuizResult');
+
       if (practiceTheoryQuestions.some((_, index) => !formData.has(`question${index}`))) {
         result.textContent = 'Please answer every question to see your score.';
         return;
       }
+
       const score = practiceTheoryQuestions.reduce((total, item, index) => (
         total + (Number(formData.get(`question${index}`)) === item.correctAnswer ? 1 : 0)
       ), 0);
+
       result.textContent = `You scored ${score} out of ${practiceTheoryQuestions.length}.`;
     });
   }
 }
 
 
+// =====================
 // Sign Up/Login Functions
+// =====================
+
 // Advanced technique: function with parameters changes the message and whether it is styled as an error.
 const showMessage = (message, isError = false) => {
   if (authMessage) {
@@ -1418,48 +1431,48 @@ if (signupForm) {
     const birthday = document.getElementById('signupBirthday').value;
 
     if (!/^\d{4}-\d{2}-\d{2}$/.test(birthday)) {
-  showMessage('Invalid birthday. Please enter a valid date.', true);
-  return;
-}
-
+      showMessage('Invalid birthday. Please enter a valid date.', true);
+      return;
+    }
 
     const birthdayDate = new Date(birthday);
-const today = new Date();
+    const today = new Date();
 
-const minimumAgeDate = new Date(
-  today.getFullYear() - 15,
-  today.getMonth(),
-  today.getDate()
-);
+    const minimumAgeDate = new Date(
+      today.getFullYear() - 15,
+      today.getMonth(),
+      today.getDate()
+    );
 
-const maximumAgeDate = new Date(
-  today.getFullYear() - 80,
-  today.getMonth(),
-  today.getDate()
-);
+    const maximumAgeDate = new Date(
+      today.getFullYear() - 80,
+      today.getMonth(),
+      today.getDate()
+    );
 
-if (birthdayDate > minimumAgeDate) {
-  showMessage('You must be at least 15 years old to sign up.', true);
-  return;
-}
+    if (birthdayDate > minimumAgeDate) {
+      showMessage('You must be at least 15 years old to sign up.', true);
+      return;
+    }
 
-if (birthdayDate < maximumAgeDate) {
-  showMessage('Please enter a valid birthday.', true);
-  return;
-}
+    if (birthdayDate < maximumAgeDate) {
+      showMessage('Please enter a valid birthday.', true);
+      return;
+    }
+
     // Advanced technique: non-trivial string manipulation removes extra spaces and standardises the email.
     const email = document.getElementById('signupEmail').value.trim().toLowerCase();
     const password = document.getElementById('signupPassword').value;
 
-      if (name.length > 50) {
+    if (name.length > 50) {
       showMessage('Full name must not exceed 50 characters.', true);
       return;
     }
 
     if (!/^[A-Za-zÀ-ÖØ-öø-ÿ -]+$/.test(name)) {
-  showMessage('Full name can only contain letters, spaces and hyphens.', true);
-  return;
-}
+      showMessage('Full name can only contain letters, spaces and hyphens.', true);
+      return;
+    }
 
     if (!name || !birthday || !email || !password) {
       showMessage('Please fill in all sign-up fields.', true);
@@ -1480,7 +1493,14 @@ if (birthdayDate < maximumAgeDate) {
     }
 
     // Advanced technique: modifying a collection by adding the new user's object to the users array.
-    users.push({ name, birthday, email, password, createdAt: new Date().toISOString() });
+    users.push({
+      name,
+      birthday,
+      email,
+      password,
+      createdAt: new Date().toISOString()
+    });
+
     saveUsers(users);
     setLoggedInUser(email);
     signupForm.reset();
@@ -1498,7 +1518,9 @@ if (loginForm) {
     const password = document.getElementById('loginPassword').value;
 
     const users = getStoredUsers();
-    const matchingUser = users.find((user) => user.email === email && user.password === password);
+    const matchingUser = users.find(
+      (user) => user.email === email && user.password === password
+    );
 
     if (!matchingUser) {
       showMessage('Invalid email or password.', true);
