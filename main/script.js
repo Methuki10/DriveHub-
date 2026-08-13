@@ -1406,6 +1406,31 @@ if (signupForm) {
 
     const name = document.getElementById('signupName').value.trim();
     const birthday = document.getElementById('signupBirthday').value;
+
+    const birthdayDate = new Date(birthday);
+const today = new Date();
+
+const minimumAgeDate = new Date(
+  today.getFullYear() - 15,
+  today.getMonth(),
+  today.getDate()
+);
+
+const maximumAgeDate = new Date(
+  today.getFullYear() - 80,
+  today.getMonth(),
+  today.getDate()
+);
+
+if (birthdayDate > minimumAgeDate) {
+  showMessage('You must be at least 15 years old to sign up.', true);
+  return;
+}
+
+if (birthdayDate < maximumAgeDate) {
+  showMessage('Please enter a valid birthday.', true);
+  return;
+}
     // Advanced technique: non-trivial string manipulation removes extra spaces and standardises the email.
     const email = document.getElementById('signupEmail').value.trim().toLowerCase();
     const password = document.getElementById('signupPassword').value;
