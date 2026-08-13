@@ -1414,6 +1414,26 @@ p {
     max-width: 220px;
 }
 
+.license-card-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.3rem;
+    border-radius: 999px;
+    background: #111;
+    color: #fff;
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    margin-top: auto;
+    transition: transform 0.18s ease, background-color 0.18s ease;
+}
+
+.license-card-button:hover {
+    background-color: #3A6696;
+    color: #fff;
+    transform: translateY(-2px);
+}
 .license-details {
     max-width: 1000px;
     margin: 3rem auto;
@@ -1856,3 +1876,18 @@ a {
     }
 }
 
+.site-footer {
+    width: 100%;
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: #111;
+    color: white;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+}
+
+.site-footer p {
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+}
