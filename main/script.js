@@ -2,7 +2,9 @@
 
 /* jshint esversion: 6 */
 
-// Smooth Scroolling 
+// =====================
+// Smooth Scrolling
+// =====================
 let _initialHashId = '';
 if (location.hash) {
   _initialHashId = location.hash.replace('#', '');
@@ -247,7 +249,9 @@ if (licenseCardsContainer) {
   });
 }
 
-  //License detailed sections 
+// =====================
+// License Detailed Sections
+// =====================
   if (document.getElementById('learner') || document.getElementById('restricted') || document.getElementById('full')) {
     licenseCards.forEach((card) => {
       const id = card.title.toLowerCase();
@@ -473,7 +477,7 @@ document.addEventListener('click', (e) => {
         }
       }
     }
-  } catch{
+  } catch {
     // ignore
   }
   
@@ -606,8 +610,7 @@ const drivingTips = [
       <p>Never assume you can cross first.</p>
     `,
     side: 'right'
-  }
-  ,
+  },
   {
     title: 'Driving to the Conditions',
     text: `
